@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgModule } from '@angular/core';
 import { Router } from '@angular/router';
 import * as auth0 from 'auth0-js';
 import * as AWS from 'aws-sdk';
@@ -7,7 +7,7 @@ import { Subject, Observable } from 'rxjs';
 
 (window as any).global = window;
 
-@Injectable()
+@NgModule()
 export class AuthService {
   public userProfile;
 
