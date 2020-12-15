@@ -2,8 +2,8 @@ import { Injectable, NgModule } from '@angular/core';
 import { Router } from '@angular/router';
 import * as auth0 from 'auth0-js';
 import * as AWS from 'aws-sdk';
-import { environment } from '../../../environments/environment';
 import { Subject, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 (window as any).global = window;
 
@@ -168,7 +168,7 @@ export class AuthService {
     return sendResult.asObservable();
   }
 
-  public setCreds(creds: any) {
+  public setCreds(creds: any): void {
     localStorage.setItem('accessKeyId', creds.accessKeyId);
     localStorage.setItem('secretAccessKey', creds.secretAccessKey);
     localStorage.setItem('sessionToken', creds.sessionToken);

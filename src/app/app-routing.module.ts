@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AboutComponent } from './about/about.component';
-import { HomeComponent } from './home/home.component';
-import { PortfolioComponent } from './portfolio/portfolio.component';
-import { PublicationsComponent } from './publications/publications.component';
+import { AboutComponent } from './base/about/about.component';
+import { HomeComponent } from './base/home/home.component';
+import { PortfolioComponent } from './base/portfolio/portfolio.component';
+import { PublicationsComponent } from './base/publications/publications.component';
+import { BrewComponent } from './brew/brew.component';
+import { PreviousBrewsComponent } from './brew/previous-brews/previous-brews.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -11,6 +13,9 @@ const routes: Routes = [
     { path: 'portfolio', component: PortfolioComponent },
     { path: 'about', component: AboutComponent },
     { path: 'publications', component: PublicationsComponent },
+    { path: 'brew/all', component: PreviousBrewsComponent},
+    { path: 'brew/:id', component: BrewComponent },
+    { path: 'brew', component: BrewComponent },
     { path: '**', redirectTo: '' }
 ];
 

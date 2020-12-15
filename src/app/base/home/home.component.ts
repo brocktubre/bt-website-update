@@ -20,7 +20,7 @@ import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.year = new Date().getFullYear();
   }
 

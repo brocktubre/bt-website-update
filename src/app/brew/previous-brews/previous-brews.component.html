@@ -1,0 +1,68 @@
+<app-navbar></app-navbar>
+<!-- Content for the main page -->
+<div class="container-fluid background" style="padding: 0;" >
+  <div class="container" style="padding-bottom: 50px;">
+    <div class="row">
+      <div class="col-md-4 col-sm-12">
+        <i class="fa fa-beer fa-2x"></i><span class="brew-heading"> BREW <span class="text-primary brew-heading">STATS</span></span>
+      </div>
+      <div class="col-md-4 col-md-offset-4 col-sm-12 text-center" style="padding-top: 1%;">
+        <span style="margin-top: 15px;"><strong><a href="/brew">Looking for the most current brew?</a></strong></span>
+      </div>
+    </div>
+    <hr>
+    <div *ngIf="loadingBrews"  class="container text-center" style="min-height: 700px;">
+      <i class="fa fa-circle-o-notch fa-spin" style="font-size:50px"></i>
+    </div>
+    <div *ngIf="!loadingBrews && previousBrewsList.length > 0" class="container" style="min-height: 700px;">
+      <table class="table table-striped table-condensed">
+          <thead>
+          <tr>
+              <th>Brew Name</th>
+              <th>Brew Date</th>
+              <th>Fermentation Complete</th>
+              <th>Stats</th>
+              <th>Images</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let brew of previousBrewsList">
+
+              <td>
+                  <img [src]="brew.embedded" class="square prev-brew" (click)="navigateToBrewStats(brew.id)" />
+                  <span class="prev-brew" (click)="navigateToBrewStats(brew.id)">{{brew.brew_name}}</span>
+              </td>
+              <td>
+                  <span class="prev-brew" (click)="navigateToBrewStats(brew.id)">{{brew.date}}</span>
+              </td>
+              <td>
+                <span *ngIf="brew.done" class="prev-brew" (click)="navigateToBrewStats(brew.id)">Yes</span>
+                <span *ngIf="!brew.done" class="prev-brew" (click)="navigateToBrewStats(brew.id)">No</span>
+              </td>
+              <td>
+                <i class="fa fa-link fa-bt-link prev-brew" (click)="navigateToBrewStats(brew.id)"></i>
+              </td>
+              <td>
+                <i class="fa fa-photo prev-brew" (click)="goToLink(brew.photos_url)"></i>
+              </td>
+          </tr>
+      </tbody>
+      </table>
+  </div>
+
+
+
+  </div>
+
+
+
+<!-- [BEGIN] Footer Container -->
+<footer class="navbar-default sticky-footer" style="margin-top: 125px;">
+  <div class="container-fluid" style="padding: 5px 0 5px 0;">
+    <div class="text-center">
+      <p style="color: #FFFFFF;"> © {{year}} Created by Brock Tubre.</p>
+    </div>
+  </div>
+</footer>
+<!-- [END] Footer Container -->
+</div>

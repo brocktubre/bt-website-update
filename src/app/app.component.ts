@@ -1,8 +1,8 @@
 // import { KinesisSandboxService } from './shared/kinesis-sandbox/kinesis-sandbox.service';
-import { AuthService } from './shared/auth/auth.service';
 import { Component, HostListener } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +15,7 @@ export class AppComponent {
               private authService: AuthService,
               private router: Router) {}
 
-  public setTitle( newTitle: string) {
+  public setTitle( newTitle: string): void {
     this.titleService.setTitle( newTitle );
   }
 

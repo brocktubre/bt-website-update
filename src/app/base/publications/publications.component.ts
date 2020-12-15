@@ -9,7 +9,7 @@ export class PublicationsComponent implements OnInit {
   public year: number;
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.year = new Date().getFullYear();
   }
 

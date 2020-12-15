@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-// import { AuthService } from '../auth/auth.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -20,16 +20,16 @@ export class NavbarComponent implements OnInit {
 
   constructor(private router: Router,
               private titleService: Title,
-              /*private authService: AuthService*/) {
+              private authService: AuthService) {
                 this.collapse = false;
                 this.isUserLoggedIn = false;
-                // this.authService.gertUserProfile().subscribe(profile => {
-                //   this.usersEmail = profile.name;
-                //   localStorage.setItem('userEmail', this.usersEmail);
-                // });
+                this.authService.gertUserProfile().subscribe(profile => {
+                  this.usersEmail = profile.name;
+                  localStorage.setItem('userEmail', this.usersEmail);
+                });
               }
 
-  ngOnInit() {
+  ngOnInit(): void {
     const url = this.router.url;
     switch (url) {
       case '/home':
@@ -67,21 +67,20 @@ export class NavbarComponent implements OnInit {
           }
           this.titleService.setTitle('Brock Tubre');
         }
-        break;
     }
 
-    // if (this.authService.isAuthenticated()) {
-    //   this.isUserLoggedIn = true;
-    //   this.usersEmail = localStorage.getItem('userEmail');
-    // }
+    if (this.authService.isAuthenticated()) {
+      this.isUserLoggedIn = true;
+      this.usersEmail = localStorage.getItem('userEmail');
+    }
   }
 
-  // public navigateAuth0Login() {
-  //   this.authService.login();
-  // }
+  public navigateAuth0Login(): void {
+    this.authService.login();
+  }
 
-  // public logoutUser() {
-  //   this.authService.logout();
-  // }
+  public logoutUser(): void {
+    this.authService.logout();
+  }
 
 }

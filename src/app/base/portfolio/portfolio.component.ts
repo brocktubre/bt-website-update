@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../shared/auth/auth.service';
-import { AuthHelper } from '../shared/auth/auth.helper';
+import { AuthHelper } from 'src/app/auth/auth.helper';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-portfolio',
@@ -14,19 +14,19 @@ export class PortfolioComponent extends AuthHelper implements OnInit {
     super(authService);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.year = new Date().getFullYear();
   }
 
-  public goToS3Store() {
+  public goToS3Store(): void {
     this.router.navigate(['s3-sandbox']);
   }
 
-  public goToQrReader() {
+  public goToQrReader(): void {
     this.router.navigate(['qr-reader']);
   }
 
-  goToAttendance() {
+  goToAttendance(): void {
     this.router.navigate(['qr-reader/attendance']);
   }
 

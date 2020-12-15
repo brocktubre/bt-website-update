@@ -10,16 +10,16 @@ export class FooterComponent implements OnInit, AfterViewInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getRandomFact();
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
 
   }
 
 
-public getRandomFact() {
+public getRandomFact(): void {
   const randomArray = new Array();
   let i = 0;
 

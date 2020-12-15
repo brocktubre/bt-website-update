@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthHelper } from '../shared/auth/auth.helper';
-import { AuthService } from '../shared/auth/auth.service';
+import { AuthHelper } from 'src/app/auth/auth.helper';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-about',
@@ -13,7 +13,7 @@ export class AboutComponent extends AuthHelper implements OnInit {
     super(authService);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.year = new Date().getFullYear();
   }
 

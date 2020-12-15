@@ -1,8 +1,5 @@
 import { Injectable, OnDestroy, Component } from '@angular/core';
-import { Router, CanActivate } from '@angular/router';
 import { AuthService } from './auth.service';
-import { map } from 'rxjs/operators';
-// import { Observable } from 'rxjs';
 import { Subscription } from 'rxjs';
 
 @Injectable()
