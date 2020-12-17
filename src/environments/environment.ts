@@ -14,7 +14,7 @@ export const environment = {
     domain: 'brocktubre.auth0.com',
     responseType: 'token id_token',
     audience: 'https://brocktubre.auth0.com/userinfo',
-    redirectUri: 'http://localhost:4201/callback',
+    redirectUri: 'http://localhost:4200/callback',
     scope: 'openid profile'
   },
   qrReader: {
