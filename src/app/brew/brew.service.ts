@@ -161,7 +161,6 @@ export class BrewService {
     };
     const getImages = this.http.get(url, httpOptions);
     getImages.subscribe((photos: any) => {
-     debugger;
     }, (error) => {
       sendResult.error('There was an retrieving brew images.');
     });

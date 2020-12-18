@@ -28,6 +28,7 @@ export class AuthService {
   }
 
   public handleAuthentication(): Observable<any> {
+
     const sendResult = new Subject<any>();
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
@@ -39,32 +40,33 @@ export class AuthService {
         const cognitoidentity = new AWS.CognitoIdentity();
         const val = cognitoidentity.getId(params, (getIdError, getIdData) => {
           // This creates a Authenticated Identity with Cognito User Identity Pool
-        const paramsIdentityId = {
-          IdentityId: getIdData.IdentityId,
-          Logins: {
-            [environment.auth0.domain] : authResult.idToken
-          }
-        };
-        cognitoidentity.getCredentialsForIdentity(paramsIdentityId, (getCredentialsForIdentityErr, getCredentialsForIdentityData) => {
-            if (err) {
-              console.error(err);
-              sendResult.error(err);
+          const paramsIdentityId = {
+            IdentityId: getIdData.IdentityId,
+            Logins: {
+              [environment.auth0.domain] : authResult.idToken
             }
-            AWS.config.update({
-              accessKeyId: getCredentialsForIdentityData.Credentials.AccessKeyId,
-              secretAccessKey: getCredentialsForIdentityData.Credentials.SecretKey,
-              sessionToken: getCredentialsForIdentityData.Credentials.SessionToken
-            });
-            const localSotrageCred = {
-              accessKeyId: getCredentialsForIdentityData.Credentials.AccessKeyId,
-              secretAccessKey: getCredentialsForIdentityData.Credentials.SecretKey,
-              region: environment.region,
-              sessionToken: getCredentialsForIdentityData.Credentials.SessionToken
-            };
-            const creds = new AWS.Credentials(AWS.config.credentials);
-            this.setCreds(localSotrageCred);
-            sendResult.next(creds);
-        });
+          };
+          cognitoidentity.getCredentialsForIdentity(paramsIdentityId, (getCredentialsForIdentityErr, getCredentialsForIdentityData) => {
+            debugger;  
+            if (err) {
+                console.error(err);
+                sendResult.error(err);
+              }
+              AWS.config.update({
+                accessKeyId: getCredentialsForIdentityData.Credentials.AccessKeyId,
+                secretAccessKey: getCredentialsForIdentityData.Credentials.SecretKey,
+                sessionToken: getCredentialsForIdentityData.Credentials.SessionToken
+              });
+              const localSotrageCred = {
+                accessKeyId: getCredentialsForIdentityData.Credentials.AccessKeyId,
+                secretAccessKey: getCredentialsForIdentityData.Credentials.SecretKey,
+                region: environment.region,
+                sessionToken: getCredentialsForIdentityData.Credentials.SessionToken
+              };
+              const creds = new AWS.Credentials(AWS.config.credentials);
+              this.setCreds(localSotrageCred);
+              sendResult.next(creds);
+          });
         });
       } else if (err) {
         sendResult.error(err);
@@ -77,7 +79,6 @@ export class AuthService {
   }
 
   public handleLimitedAuthentication(): Observable<any> {
-    debugger;
     console.log('Application starting... ');
     const sendResult = new Subject<any>();
     if (this.isAuthenticated()) {

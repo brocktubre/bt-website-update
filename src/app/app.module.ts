@@ -25,7 +25,7 @@ import { AuthGuardService } from './auth/auth-guard.service';
     SandboxModule
   ],
   exports: [],
-  providers: [AuthGuardService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
