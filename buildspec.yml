@@ -10,7 +10,7 @@ phases:
       - npm install
   build:
     commands:
-      - ng build --prod --aot
+      - npm run build --prod --aot
   post_build:
     commands:
       - aws --region us-east-2 s3 sync ./dist/app s3://brocktubre.com-angular-code/ --acl=public-read --delete
