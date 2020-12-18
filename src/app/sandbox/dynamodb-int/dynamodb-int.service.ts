@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { DynamodbS3ObjectModel } from './dynamodb-s3-object.model';
 
 @Injectable()
-export class DynamodbSandboxService {
+export class DynamodbIntService {
   private tableName: string;
   private docClient;
 

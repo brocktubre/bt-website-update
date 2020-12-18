@@ -8,8 +8,8 @@ import { DynamodbIntService } from '../dynamodb-int/dynamodb-int.service';
 
 @Component({
   selector: 'app-s3-sandbox',
-  templateUrl: './s3-sandbox.component.html',
-  styleUrls: ['./s3-sandbox.component.css']
+  templateUrl: './s3-int.component.html',
+  styleUrls: ['./s3-int.component.css']
 })
 export class S3IntComponent implements OnInit {
   public aws;

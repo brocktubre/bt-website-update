@@ -38,7 +38,7 @@ export class NavbarComponent implements OnInit {
           this.titleService.setTitle('Home | Brock Tubre');
           break;
         case '/portfolio':
-        case '/s3-sandbox':
+        case '/s3-int':
         case '/qr-reader':
         case '/qr-reader/attendance':
           this.isPortfolioActive = true;

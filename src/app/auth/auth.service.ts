@@ -1,4 +1,4 @@
-import { Injectable, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { Router } from '@angular/router';
 import * as auth0 from 'auth0-js';
 import * as AWS from 'aws-sdk';
@@ -77,6 +77,7 @@ export class AuthService {
   }
 
   public handleLimitedAuthentication(): Observable<any> {
+    debugger;
     console.log('Application starting... ');
     const sendResult = new Subject<any>();
     if (this.isAuthenticated()) {
@@ -101,7 +102,7 @@ export class AuthService {
         IdentityId: data.IdentityId
       };
       cognitoidentity.getCredentialsForIdentity(paramsIdentityId, (getCredentialsForIdentityErr, getCredentialsForIdentityData) => {
-          if (err) {
+        if (err) {
             console.error(err);
             sendResult.error(err);
           }
