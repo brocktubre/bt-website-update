@@ -19,7 +19,7 @@ export class PortfolioComponent extends AuthHelper implements OnInit {
   }
 
   public goToS3Store(): void {
-    this.router.navigate(['s3-sandbox']);
+    this.router.navigate(['s3-int']);
   }
 
   public goToQrReader(): void {

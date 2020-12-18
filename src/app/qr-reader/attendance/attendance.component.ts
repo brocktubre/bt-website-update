@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import * as FileSaver from 'file-saver';
-import { DynamodbIntService } from 'src/app/sandbox/dynamodb-int/dynamodb-int.service';
-import { S3IntService } from 'src/app/sandbox/s3-int/s3-int.service';
+import { DynamodbIntService } from 'src/app/aws-integration/dynamodb-int/dynamodb-int.service';
+import { S3IntService } from 'src/app/aws-integration/s3-int/s3-int.service';
 import { environment } from 'src/environments/environment';
 import { QrCodeObject } from '../qr-code-object.model';
 

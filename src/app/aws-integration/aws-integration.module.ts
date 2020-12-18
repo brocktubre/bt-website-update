@@ -19,4 +19,4 @@ import { LambdaIntService } from './lambda-int/lambda-int.service';
   exports: [S3IntComponent],
   providers: [S3IntService, DynamodbIntService, LambdaIntService]
 })
-export class SandboxModule { }
+export class AWSIntegrationModule { }

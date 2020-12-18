@@ -1,0 +1,17 @@
+
+version: 0.1
+
+phases:
+  install:
+    commands:
+      - printenv
+      - rm -rf package-lock.json node_modules
+      - npm cache verify
+      - npm install
+  build:
+    commands:
+      - npm run build
+  post_build:
+    commands:
+      - aws --region us-east-2 s3 sync ./dist/ s3://brocktubre.com-angular-code/ --acl=public-read --delete
+      - aws --region us-east-2 cloudfront create-invalidation --distribution-id EYZAXH6Y01AFW --paths '/*'

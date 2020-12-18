@@ -7,7 +7,7 @@ import { PortfolioComponent } from './base/portfolio/portfolio.component';
 import { PublicationsComponent } from './base/publications/publications.component';
 import { BrewComponent } from './brew/brew.component';
 import { PreviousBrewsComponent } from './brew/previous-brews/previous-brews.component';
-import { S3IntComponent } from './sandbox/s3-int/s3-int.component';
+import { S3IntComponent } from './aws-integration/s3-int/s3-int.component';
 import { AuthGuardService as AuthGuard } from './auth/auth-guard.service';
 import { GradesComponent } from './grades/grades.component';
 import { QrReaderComponent } from './qr-reader/qr-reader.component';

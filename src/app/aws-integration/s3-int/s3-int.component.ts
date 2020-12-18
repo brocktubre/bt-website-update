@@ -7,7 +7,7 @@ import { S3IntService } from './s3-int.service';
 import { DynamodbIntService } from '../dynamodb-int/dynamodb-int.service';
 
 @Component({
-  selector: 'app-s3-sandbox',
+  selector: 'app-s3-int',
   templateUrl: './s3-int.component.html',
   styleUrls: ['./s3-int.component.css']
 })
@@ -29,8 +29,8 @@ export class S3IntComponent implements OnInit {
   @ViewChild('fileInputVal') myFileInputVal: ElementRef;
   @ViewChild('myModal') modal: BsModalComponent;
 
-  constructor(private s3SandboxService: S3IntService,
-              private dynamodbSandboxService: DynamodbIntService) {
+  constructor(private s3IntService: S3IntService,
+              private dynamodbIntService: DynamodbIntService) {
     this.objectList = new Array<DynamodbS3ObjectModel>();
     this.loadingObjs = true;
     this.bucketName = environment.public_bucket_name;
@@ -64,7 +64,7 @@ export class S3IntComponent implements OnInit {
     }else {
       this.loadingObjs = true;
       console.log('We want to upload this document: ', this.fileToUpload);
-      this.s3SandboxService.uploadObjectToS3(this.bucketName, this.fileToUpload).subscribe(item => {
+      this.s3IntService.uploadObjectToS3(this.bucketName, this.fileToUpload).subscribe(item => {
         setTimeout(() => {
           this.loadObjects();
           this.myFileInputVal.nativeElement.value = null;
@@ -75,18 +75,18 @@ export class S3IntComponent implements OnInit {
   }
 
   public loadObjects() {
-    // this.s3SandboxService.getItemsFromBucket(this.bucketName).subscribe(items => {
+    // this.s3IntService.getItemsFromBucket(this.bucketName).subscribe(items => {
     //   this.objectList = items;
     //   this.loadingObjs = false;
     // });
-    this.dynamodbSandboxService.getItemsFromDynamoDb(this.tableName).subscribe(items => {
+    this.dynamodbIntService.getItemsFromDynamoDb(this.tableName).subscribe(items => {
       this.objectList = items;
       this.loadingObjs = false;
     });
   }
 
   public downloadObject(object: any) {
-    this.s3SandboxService.getObjectFromS3(this.bucketName, object.object_name).subscribe(item => {
+    this.s3IntService.getObjectFromS3(this.bucketName, object.object_name).subscribe(item => {
       const blob = new Blob([item.Body], { type: item.ContentType });
       FileSaver.saveAs(blob, object.object_display_name);
     });
@@ -94,7 +94,7 @@ export class S3IntComponent implements OnInit {
 
   public deleteObject(object: any) {
     this.loadingObjs = true;
-    this.s3SandboxService.deleteObjectFromS3(this.bucketName, object.object_name).subscribe(item => {
+    this.s3IntService.deleteObjectFromS3(this.bucketName, object.object_name).subscribe(item => {
         this.fileToUpload = null;
         setTimeout(() => this.loadObjects(), 2000);
     });
@@ -127,7 +127,7 @@ export class S3IntComponent implements OnInit {
       console.log('Need to update this object: ', updateObj);
       this.loadingObjs = true;
       this.closeEditModal();
-      this.dynamodbSandboxService.updateItemFromDynamoDb(updateObj).subscribe((data) => {
+      this.dynamodbIntService.updateItemFromDynamoDb(updateObj).subscribe((data) => {
         setTimeout(() => this.loadObjects(), 2000);
         this.closeEditModal();
       });

@@ -1,9 +1,9 @@
-import { interval } from 'rxjs/observable/interval';
+import { interval } from 'rxjs';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
 import moment from 'moment';
 import { QrCodeObject } from './qr-code-object.model';
 import { QrReaderService } from './qr-reader.service';
-import { S3IntService } from '../sandbox/s3-int/s3-int.service';
+import { S3IntService } from '../aws-integration/s3-int/s3-int.service';
 
 @Component({
   selector: 'app-qr-reader',

@@ -4,8 +4,8 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { AuthHelper } from '../auth/auth.helper';
 import { GradesObjectModel } from './grades-object.model';
 import { environment } from 'src/environments/environment';
-import { LambdaIntService } from '../sandbox/lambda-int/lambda-int.service';
-import { DynamodbIntService } from '../sandbox/dynamodb-int/dynamodb-int.service';
+import { LambdaIntService } from '../aws-integration/lambda-int/lambda-int.service';
+import { DynamodbIntService } from '../aws-integration/dynamodb-int/dynamodb-int.service';
 
 @Component({
   selector: 'app-grades',
@@ -98,7 +98,6 @@ export class GradesComponent extends AuthHelper implements OnInit {
 
     const filteredData = this.changeFilter(this.data, this.config);
     const sortedData = this.changeSort(filteredData, this.config);
-    debugger;
     this.rows = sortedData;
     this.length = sortedData.length;
 

@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { AuthModule } from './auth/auth.module';
 import { BrewModule } from './brew/brew.module';
 import { HttpClientModule } from '@angular/common/http';
-import { SandboxModule } from './sandbox/sandbox.module';
+import { AWSIntegrationModule } from './aws-integration/aws-integration.module';
 import { GradesModule } from './grades/grades.module';
 import { QrReaderModule } from './qr-reader/qr-reader.module';
 
@@ -23,7 +23,7 @@ import { QrReaderModule } from './qr-reader/qr-reader.module';
     CommonModule,
     BrewModule,
     HttpClientModule,
-    SandboxModule,
+    AWSIntegrationModule,
     GradesModule,
     QrReaderModule
   ],
