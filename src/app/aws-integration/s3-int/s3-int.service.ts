@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { environment } from '../../../environments/environment';
-import { Component, OnInit } from '@angular/core';
-import * as S3 from 'aws-sdk/clients/s3';
 import * as AWS from 'aws-sdk';
 import 'rxjs/add/observable/of';
 import { v4 as uuid } from 'uuid';
