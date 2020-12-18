@@ -7,6 +7,7 @@ import * as AWS from 'aws-sdk';
 import { Moment } from 'moment';
 import { AuthService } from 'src/app/auth/auth.service';
 import { DynamodbS3ObjectModel } from './dynamodb-s3-object.model';
+import { QrCodeObject } from 'src/app/qr-reader/qr-code-object.model';
 
 @Injectable()
 export class DynamodbIntService {
@@ -69,27 +70,27 @@ export class DynamodbIntService {
     return sendResult.asObservable();
   }
 
-  // public getAttendanceFromDynamoDb(tableName: string): Observable<Array<QrCodeObject>> {
-  //   const sendResult = new Subject<Array<QrCodeObject>>();
-  //   const d = new Date();
-  //   d.setHours(d.getHours() - 5);
-  //   const readDate = d.toDateString();
+  public getAttendanceFromDynamoDb(tableName: string): Observable<Array<QrCodeObject>> {
+    const sendResult = new Subject<Array<QrCodeObject>>();
+    const d = new Date();
+    d.setHours(d.getHours() - 5);
+    const readDate = d.toDateString();
 
-  //   const params = {
-  //     TableName: tableName,
-  //     ExpressionAttributeValues: {
-  //       ':date': readDate
-  //      },
-  //      FilterExpression: 'class_date IN (:date)',
-  //   };
+    const params = {
+      TableName: tableName,
+      ExpressionAttributeValues: {
+        ':date': readDate
+       },
+       FilterExpression: 'class_date IN (:date)',
+    };
 
-  //   this.docClient.scan(params, function(err, data) {
-  //     if (err) {
-  //       sendResult.error(err);
-  //     }else {
-  //       sendResult.next(data.Items);
-  //     }
-  //   });
-  //   return sendResult.asObservable();
-  // }
+    this.docClient.scan(params, function(err, data) {
+      if (err) {
+        sendResult.error(err);
+      }else {
+        sendResult.next(data.Items);
+      }
+    });
+    return sendResult.asObservable();
+  }
 }

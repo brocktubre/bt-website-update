@@ -9,6 +9,9 @@ import { BrewComponent } from './brew/brew.component';
 import { PreviousBrewsComponent } from './brew/previous-brews/previous-brews.component';
 import { S3IntComponent } from './sandbox/s3-int/s3-int.component';
 import { AuthGuardService as AuthGuard } from './auth/auth-guard.service';
+import { GradesComponent } from './grades/grades.component';
+import { QrReaderComponent } from './qr-reader/qr-reader.component';
+import { AttendanceComponent } from './qr-reader/attendance/attendance.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -21,6 +24,10 @@ const routes: Routes = [
     { path: 'brew', component: BrewComponent },
     { path: 's3-int', component: S3IntComponent, canActivate: [AuthGuard] },
     { path: 'callback', component: CallbackComponent },
+    { path: 'grades', component: GradesComponent },
+    { path: 'grades/:id', component: GradesComponent },
+    { path: 'qr-reader', component: QrReaderComponent, canActivate: [AuthGuard] },
+    { path: 'qr-reader/attendance', component: AttendanceComponent, canActivate: [AuthGuard] },
     { path: '**', redirectTo: '' }
     
 ];

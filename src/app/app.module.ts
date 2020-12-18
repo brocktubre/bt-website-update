@@ -8,7 +8,8 @@ import { AuthModule } from './auth/auth.module';
 import { BrewModule } from './brew/brew.module';
 import { HttpClientModule } from '@angular/common/http';
 import { SandboxModule } from './sandbox/sandbox.module';
-import { AuthGuardService } from './auth/auth-guard.service';
+import { GradesModule } from './grades/grades.module';
+import { QrReaderModule } from './qr-reader/qr-reader.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,9 @@ import { AuthGuardService } from './auth/auth-guard.service';
     CommonModule,
     BrewModule,
     HttpClientModule,
-    SandboxModule
+    SandboxModule,
+    GradesModule,
+    QrReaderModule
   ],
   exports: [],
   providers: [],

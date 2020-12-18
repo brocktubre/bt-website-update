@@ -47,7 +47,6 @@ export class AuthService {
             }
           };
           cognitoidentity.getCredentialsForIdentity(paramsIdentityId, (getCredentialsForIdentityErr, getCredentialsForIdentityData) => {
-            debugger;  
             if (err) {
                 console.error(err);
                 sendResult.error(err);
