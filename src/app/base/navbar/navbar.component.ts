@@ -53,6 +53,7 @@ export class NavbarComponent implements OnInit {
           this.titleService.setTitle('About | Brock Tubre');
           break;
         case '/login':
+        case '/callback':
           this.isLoginActive = true;
           this.titleService.setTitle('Login | Brock Tubre');
           break;
