@@ -8,7 +8,7 @@ export class AuthHelper implements OnDestroy {
 
   constructor(private auth: AuthService) {
     this.sub = this.auth.handleLimitedAuthentication().subscribe(
-      data => console.log('Got limited user`s creds.'),
+      data => console.log('Got limited user`s credentials.'),
       err => console.log(err)
     );
   }
@@ -16,6 +16,4 @@ export class AuthHelper implements OnDestroy {
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
-
-
 }

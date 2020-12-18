@@ -72,7 +72,7 @@ export class GradesComponent extends AuthHelper implements OnInit {
     this.readDate = d.toDateString();
   }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     const secretId = this.activeRoute.snapshot.params['id'];
     if (secretId) {
       this.lambdaIntService.triggerFunction(this.functionName, secretId).subscribe(items => {
@@ -98,6 +98,7 @@ export class GradesComponent extends AuthHelper implements OnInit {
 
     const filteredData = this.changeFilter(this.data, this.config);
     const sortedData = this.changeSort(filteredData, this.config);
+    debugger;
     this.rows = sortedData;
     this.length = sortedData.length;
 

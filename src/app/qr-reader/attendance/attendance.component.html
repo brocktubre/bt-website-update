@@ -6,7 +6,7 @@
   <div class="container">
       <div class="row">
           <div class="col-md-12">
-              <strong><h2> <i class="fa fa-id-card-o"></i>{{readDate}} <span class="text-primary"> ATTENDANCE</span></h2></strong>
+              <strong><h2> <i class="fas fa-id-card-o"></i>{{readDate}} <span class="text-primary"> ATTENDANCE</span></h2></strong>
           </div>
         </div>
         <hr>
@@ -29,10 +29,10 @@
                       {{a.students_last_name}}
                   </td>
                   <td>
-                      <i *ngIf="a.validated" class="fa fa-check" style="color: #3fb618"></i>
+                      <i *ngIf="a.validated" class="fas fa-check" style="color: #3fb618"></i>
                   </td>
                   <!-- <td>
-                      <i *ngIf="a.validated" (click)="getImageSnap(a);" class="fa fa-image fa-bt-link"></i>
+                      <i *ngIf="a.validated" (click)="getImageSnap(a);" class="fas fa-image fa-bt-link"></i>
                   </td> -->
               </tr>
           </tbody>
@@ -42,7 +42,7 @@
           <span class="alert alert-danger col-md-12">No QR codes created today.</span>
       </div>
       <div *ngIf="loadingAttendance"  class="container text-center" style="min-height: 700px;">
-          <i class="fa fa-circle-o-notch fa-spin" style="font-size:50px"></i>
+          <i class="fas fa-circle-o-notch fa-spin" style="font-size:50px"></i>
       </div>
   <app-footer></app-footer>
   <!-- [END] Footer content row -->

@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import * as AWS from 'aws-sdk';
-// import { QrCodeObject } from '../models/qr-code-object.model';
 import { Moment } from 'moment';
 import { AuthService } from 'src/app/auth/auth.service';
 import { DynamodbS3ObjectModel } from './dynamodb-s3-object.model';
@@ -28,7 +27,7 @@ export class DynamodbIntService {
 
   public getItemsFromDynamoDb(tableName: string): Observable<Array<DynamodbS3ObjectModel>> {
     const sendResult = new Subject<Array<DynamodbS3ObjectModel>>();
-
+    debugger;
     const params = {
       TableName: this.tableName,
       ExpressionAttributeValues: {
