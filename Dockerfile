@@ -15,4 +15,4 @@ RUN npm install -g @angular/cli
 WORKDIR /home/bt-website-update
 
 # docker image build -t bt-website-update .
-# docker run -p 4200:4200 -v /Users/brocktubre/Desktop/Projects/bt-website-update:/home/ -it bt-website-update
+# docker run -p 4200:4200 -v /Users/brocktubre/Desktop/Projects/bt-website-update:/home/bt-website-update -it bt-website-update
