@@ -18,7 +18,8 @@
               "rxjs/add/observable/of",
               "chart.js",
               "file-saver",
-              "uuid"
+              "uuid",
+              "ng2-table/ng2-table"
             ],
             "outputPath": "dist/app",
             "index": "src/index.html",

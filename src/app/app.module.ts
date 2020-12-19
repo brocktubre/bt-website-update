@@ -10,6 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AWSIntegrationModule } from './aws-integration/aws-integration.module';
 import { GradesModule } from './grades/grades.module';
 import { QrReaderModule } from './qr-reader/qr-reader.module';
+import { UiSwitchModule } from 'ngx-toggle-switch';
+// import { Ng2TableModule } from 'ng2-table/ng2-table';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { QrReaderModule } from './qr-reader/qr-reader.module';
     HttpClientModule,
     AWSIntegrationModule,
     GradesModule,
-    QrReaderModule
+    QrReaderModule,
+    // Ng2TableModule,
+    UiSwitchModule
   ],
   exports: [],
   providers: [],

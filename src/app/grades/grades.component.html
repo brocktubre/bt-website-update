@@ -19,11 +19,11 @@
           </div>
         </div>
         <div *ngIf="hasSecretID && !loadingGrades && gradesList.length > 0" class="container" style="min-height: 700px;" #tableContainer>
-          <ng-table [config]="config"
+          <!-- <ng-table [config]="config"
           (tableChanged)="onChangeTable(config)"
           (cellClicked)="onCellClick($event)"
           [rows]="rows" [columns]="columns">
-        </ng-table>
+        </ng-table> -->
         </div>
       <div *ngIf="hasSecretID && loadingGrades"  class="container text-center" style="min-height: 700px;">
           <i class="fas fa-circle-notch fa-spin" style="font-size:50px"></i>

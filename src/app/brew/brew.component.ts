@@ -78,7 +78,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
         this.loadingStats = false;
 
         this.num_of_readings = this.stats_G.length;
-        console.log('There are brew stats in the Google sheet. Number of readings: ' + this.num_of_readings);
+        // console.log('There are brew stats in the Google sheet. Number of readings: ' + this.num_of_readings);
 
         // Not enough data collected. Show alert warning.
         if (this.num_of_readings <= 2) {
@@ -108,7 +108,7 @@ export class BrewComponent implements OnInit, AfterViewInit {
           }
           this.buildChart();
           this.getMoreStats();
-          console.log('User wants to see ALL results: ' + this.stats_G.length);
+          // console.log('User wants to see ALL results: ' + this.stats_G.length);
           return;
         }
 
@@ -138,9 +138,9 @@ export class BrewComponent implements OnInit, AfterViewInit {
         }
         this.buildChart();
         this.getMoreStats();
-        console.log('Number of TOTAL readings: ' + this.num_of_readings);
-        console.log('Number of results User wants to see: ' + this.num_of_results_to_show);
-        console.log('Number of results currently being SHOWN: ' + returnResults.length);
+        // console.log('Number of TOTAL readings: ' + this.num_of_readings);
+        // console.log('Number of results User wants to see: ' + this.num_of_results_to_show);
+        // console.log('Number of results currently being SHOWN: ' + returnResults.length);
 
       } else {
         this.isError = true;
