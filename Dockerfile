@@ -9,6 +9,7 @@ RUN apt-get install nodejs -y
 RUN npm install -g npm
 RUN npm install -g @angular/cli
 # ng serve --host 0.0.0.0 --port 4200
+# npm run start
 
 
 WORKDIR /home/bt-website-update
