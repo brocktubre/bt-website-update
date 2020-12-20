@@ -27,7 +27,6 @@ export class DynamodbIntService {
 
   public getItemsFromDynamoDb(tableName: string): Observable<Array<DynamodbS3ObjectModel>> {
     const sendResult = new Subject<Array<DynamodbS3ObjectModel>>();
-    debugger;
     const params = {
       TableName: this.tableName,
       ExpressionAttributeValues: {

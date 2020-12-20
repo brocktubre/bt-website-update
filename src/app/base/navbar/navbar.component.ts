@@ -29,7 +29,7 @@ export class NavbarComponent implements OnInit {
                 });
               }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     const url = this.router.url;
     switch (url) {
       case '/home':
@@ -77,6 +77,8 @@ export class NavbarComponent implements OnInit {
   }
 
   public navigateAuth0Login(): void {
+    const url = this.router.url;
+    this.authService.saveLocation(url)
     this.authService.login();
   }
 

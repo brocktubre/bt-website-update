@@ -27,6 +27,10 @@ export class AuthService {
     this.auth0.authorize();
   }
 
+  public saveLocation(currLocation: string): void {
+    localStorage.setItem("redirectLocation", currLocation);
+  }
+
   public handleAuthentication(): Observable<any> {
     const sendResult = new Subject<any>();
     this.auth0.parseHash((err, authResult) => {

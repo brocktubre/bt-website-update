@@ -16,7 +16,8 @@ export class CallbackComponent implements OnInit, OnDestroy {
     this.subscription = authService.handleAuthentication().subscribe(creds => {
       if (creds) {
         console.log('Setting user to Auth access.');
-        this.router.navigate(['home']);
+        const url = localStorage.getItem("redirectLocation");
+        this.router.navigate([url]);
       }
     });
   }
