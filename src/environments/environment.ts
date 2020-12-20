@@ -50,5 +50,8 @@ export const environment = {
   },
   brewStats: {
     jsonUrlPreviousBrews: 'https://spreadsheets.google.com/feeds/list/1mz-O7IRzxsVMQXtNIuK_vL14dYV3N2PuNNns9RCCMco/2/public/values?alt=json'
+  },
+  randomFactUrl: {
+    url: 'https://uselessfacts.jsph.pl/random.json?language=en'
   }
 };

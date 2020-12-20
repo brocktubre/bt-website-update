@@ -7,6 +7,7 @@ import { NavbarComponent } from '../base/navbar/navbar.component';
 import { PublicationsComponent } from './publications/publications.component';
 import { FooterComponent } from './footer/footer.component';
 import { ValidationMessagesComponent } from './validation-messages/validation-messages.component';
+import { FooterService } from './footer/footer.service';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { ValidationMessagesComponent } from './validation-messages/validation-me
     NavbarComponent,
     FooterComponent,
     ValidationMessagesComponent
-  ]
+  ],
+  providers: [FooterService]
 })
 export class BaseModule { }
