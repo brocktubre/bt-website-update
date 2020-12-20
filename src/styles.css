@@ -157,7 +157,7 @@ ul.timeline > li:before {
   cursor: pointer;
 }
 
-.rounded:hover {
+.rounded:hover, .login:hover {
   cursor: pointer;
 }
 

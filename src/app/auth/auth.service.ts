@@ -28,7 +28,6 @@ export class AuthService {
   }
 
   public handleAuthentication(): Observable<any> {
-
     const sendResult = new Subject<any>();
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {

@@ -20,7 +20,7 @@
           <li [ngClass]="{'active': isPortfolioActive}"><a href='/portfolio'><i class="fas fa-cubes"></i>PORTFOLIO</a></li>
           <li [ngClass]="{'active': isPublicationsActive}"><a href='/publications'><i class="fas fa-graduation-cap"></i>PUBLICATIONS</a></li>
           <li [ngClass]="{'active': isAboutActive}"><a href='/about'><i class="fas fa-question"></i>ABOUT ME</a></li>
-          <li *ngIf="!isUserLoggedIn" [ngClass]="{'active': isLoginActive}"><a href='#' (click)="navigateAuth0Login()"><i class="fas fa-lock"></i>LOGIN</a></li>
+          <li *ngIf="!isUserLoggedIn" [ngClass]="{'active': isLoginActive}"><a class="login" (click)="navigateAuth0Login()"><i class="fas fa-lock"></i>LOGIN</a></li>
           <li *ngIf="isUserLoggedIn"><a href='#' (click)="logoutUser()"><i class="fas fa-sign-out-alt"></i>Hello, {{usersEmail}}</a></li>
           </ul>
         </div>
