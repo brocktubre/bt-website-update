@@ -1,10 +1,9 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 RUN apt-get update
 RUN apt-get install curl gcc g++ make git -y
-EXPOSE 4201
 
 # Remove before demo
-RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
 RUN apt-get install nodejs -y
 RUN npm install -g npm
 RUN npm install -g @angular/cli
