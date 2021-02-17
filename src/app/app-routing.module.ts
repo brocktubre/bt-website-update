@@ -1,3 +1,4 @@
+import { OssCodeComponent } from './oss-coding/oss-code/oss-code.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CallbackComponent } from './auth/callback/callback.component';
@@ -12,6 +13,8 @@ import { AuthGuardService as AuthGuard } from './auth/auth-guard.service';
 import { GradesComponent } from './grades/grades.component';
 import { QrReaderComponent } from './qr-reader/qr-reader.component';
 import { AttendanceComponent } from './qr-reader/attendance/attendance.component';
+import { OssCodingComponent } from './oss-coding/oss-coding.component';
+import { OssCodingModule } from './oss-coding/oss-coding.module';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -28,8 +31,10 @@ const routes: Routes = [
     { path: 'grades/:id', component: GradesComponent },
     { path: 'qr-reader', component: QrReaderComponent, canActivate: [AuthGuard] },
     { path: 'qr-reader/attendance', component: AttendanceComponent, canActivate: [AuthGuard] },
+    { path: 'oss-coding', component: OssCodingComponent },
+    { path: 'oss-coding/:start/:end/:current', component: OssCodeComponent },
     { path: '**', redirectTo: '' }
-    
+
 ];
 
 @NgModule({

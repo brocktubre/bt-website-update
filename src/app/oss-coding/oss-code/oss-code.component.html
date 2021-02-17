@@ -1,0 +1,48 @@
+<app-navbar></app-navbar>
+<!-- Content for the main page -->
+<div class="container-fluid background" style="padding: 0;" >
+  <div class="container" style="padding-bottom: 50px;">
+    <div class="row">
+      <div class="col-md-4 col-sm-12">
+        <strong><h2> <i class="fas fa-mouse"></i>OSS CODING <span class="text-primary"></span></h2></strong>
+      </div>
+      <div class="col-md-4 col-md-offset-4 col-sm-12 text-center" style="padding-top: 3%;">
+        <span style="margin-top: 15px;"><strong><a href="/oss-coding">Enter new start and end comments.</a></strong></span>
+      </div>
+    </div>
+    <hr>
+    <div *ngIf="loadingComments"  class="container text-center" style="min-height: 700px;">
+      <i class="fas fa-circle-notch fa-spin" style="font-size:50px"></i>
+    </div>
+    <div *ngIf="!loadingComments"  class="container" style="min-height: 700px;">
+      <div class="form-group col-md-12 comments-text">
+        <!-- <h1 class="text-center"> Select all codes that apply</h1> -->
+        <p> User Login: {{userLogin}}</p>
+        <p> Comment URL: <a (click)="goToLink(commentUrl)">{{commentUrl}}</a></p>
+        <br />
+        <p> Body: {{body}} </p>
+        <br/>
+        <p> Current Codes: </p>
+        <br />
+        <div class="col-md-6">
+          <button class="btn btn-primary form-control" (click)="previous()"><i class="fas fa-chevron-left"></i> Previous Comment </button>
+        </div>
+        <div class="col-md-6">
+          <button class="btn btn-success form-control" (click)="next()"> Next Comment <i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- [BEGIN] Footer Container -->
+<footer class="navbar-default sticky-footer" style="margin-top: 125px;">
+  <div class="container-fluid" style="padding: 5px 0 5px 0;">
+    <div class="text-center">
+      <p style="color: #FFFFFF;"> © {{year}} Created by Brock Tubre.</p>
+    </div>
+  </div>
+</footer>
+<!-- [END] Footer Container -->
+</div>
+

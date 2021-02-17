@@ -12,10 +12,11 @@ import { GradesModule } from './grades/grades.module';
 import { QrReaderModule } from './qr-reader/qr-reader.module';
 import { UiSwitchModule } from 'ngx-toggle-switch';
 // import { Ng2TableModule } from 'ng2-table/ng2-table';
+import { OssCodingModule } from './oss-coding/oss-coding.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +30,8 @@ import { UiSwitchModule } from 'ngx-toggle-switch';
     GradesModule,
     QrReaderModule,
     // Ng2TableModule,
-    UiSwitchModule
+    UiSwitchModule,
+    OssCodingModule
   ],
   exports: [],
   providers: [],
