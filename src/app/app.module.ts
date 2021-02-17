@@ -13,6 +13,7 @@ import { QrReaderModule } from './qr-reader/qr-reader.module';
 import { UiSwitchModule } from 'ngx-toggle-switch';
 // import { Ng2TableModule } from 'ng2-table/ng2-table';
 import { OssCodingModule } from './oss-coding/oss-coding.module';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { OssCodingModule } from './oss-coding/oss-coding.module';
     QrReaderModule,
     // Ng2TableModule,
     UiSwitchModule,
-    OssCodingModule
+    OssCodingModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
   exports: [],
   providers: [],

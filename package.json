@@ -26,6 +26,7 @@
     "file-saver": "^2.0.5",
     "jquery": "^3.5.1",
     "moment": "^2.29.1",
+    "ng-multiselect-dropdown": "^0.2.14",
     "ng2-bs3-modal": "^0.15.0",
     "ngx-toggle-switch": "^2.0.5",
     "rxjs": "~6.6.0",
