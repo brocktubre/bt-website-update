@@ -14,13 +14,17 @@
     <div *ngIf="loadingComments"  class="container text-center" style="min-height: 700px;">
       <i class="fas fa-circle-notch fa-spin" style="font-size:50px"></i>
     </div>
-    <div *ngIf="!loadingComments"  class="container" style="min-height: 700px;">
+    <div *ngIf="hideButtons"  class="container text-center" style="min-height: 700px;">
+      <p class="text-success"><strong>{{userMessage}}</strong></p>
+    </div>
+    <div *ngIf="!loadingComments && !hideButtons"  class="container" style="min-height: 700px;">
       <div class="form-group col-md-12 comments-text">
         <!-- <h1 class="text-center"> Select all codes that apply</h1> -->
+        <p> Comment ID: {{commentId}}</p>
         <p> User Login: {{userLogin}}</p>
         <p> Comment URL: <a (click)="goToLink(commentUrl)">{{commentUrl}}</a></p>
         <br />
-        <p> Body: {{body}} </p>
+        <p><strong> {{body}} </strong></p>
         <br/>
         <p> Current Codes: </p>
         <br />
