@@ -12,13 +12,13 @@
       <i class="fas fa-circle-notch fa-spin" style="font-size:50px"></i>
     </div>
     <div *ngIf="!loadingComments"  class="container text-center" style="min-height: 700px;">
-      <div class="form-group col-md-5 col-md-offset-2">
+      <div class="form-group col-md-6 col-md-offset-3">
         <h3>Enter Starting and Ending Comment Numbers</h3>
         <p>These number have been assigned specifically to you.</p>
         <h5 class="text-danger" *ngIf="inputSubmitMessage"><strong>{{inputSubmitMessage}}</strong></h5>
         <input autofocus class="form-control" type="text" value="" placeholder="Starting Comment Number" #startingComment />
         <br/>
-        <input autofocus class="form-control" type="text" value="" placeholder="Ending Comment Number" #endingComment />
+        <input class="form-control" type="text" value="" placeholder="Ending Comment Number" #endingComment />
         <button class="btn btn-primary form-control" style="margin-top: 15px;" (click)="startCoding()"> Start Coding </button>
       </div>
     </div>

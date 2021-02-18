@@ -37,6 +37,7 @@
               [data]="dropdownList"
               [(ngModel)]="selectedItems"
               (onSelect)="onItemSelect($event)"
+              (onSelectAll)="onSelectAll($event)"
             >
             </ng-multiselect-dropdown>
           </div>
@@ -52,6 +53,7 @@
               [data]="dropdownListStatements"
               [(ngModel)]="selectedItemsStatements"
               (onSelect)="onItemSelect($event)"
+              (onSelectAll)="onSelectAll($event)"
             >
             </ng-multiselect-dropdown>
           </div>
@@ -67,8 +69,14 @@
               [data]="dropdownListOther"
               [(ngModel)]="selectedItemsOther"
               (onSelect)="onItemSelect($event)"
+              (onSelectAll)="onSelectAll($event)"
             >
             </ng-multiselect-dropdown>
+          </div>
+        </div>
+        <div class="row" *ngIf="userMessage" style="padding-top: 25px;">
+          <div class="col-md-12 text-center">
+            <p class="text-danger"><strong>{{userMessage}}</strong></p>
           </div>
         </div>
         <div class="row" style="padding-top: 100px;">
@@ -85,13 +93,13 @@
 
 
 <!-- [BEGIN] Footer Container -->
-<footer class="navbar-default sticky-footer" style="margin-top: 125px;">
+<!-- <footer class="navbar-default sticky-footer" style="margin-top: 125px;">
   <div class="container-fluid" style="padding: 5px 0 5px 0;">
     <div class="text-center">
       <p style="color: #FFFFFF;"> © {{year}} Created by Brock Tubre.</p>
     </div>
   </div>
-</footer>
+</footer> -->
 <!-- [END] Footer Container -->
 </div>
 

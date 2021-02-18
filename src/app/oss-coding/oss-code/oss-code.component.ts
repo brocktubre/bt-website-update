@@ -24,10 +24,14 @@ export class OssCodeComponent implements OnInit {
   public hideButtons: boolean;
   public userMessage: string;
 
+
   public dropdownList = [];
   public dropdownListStatements = [];
   public dropdownListOther = [];
   public selectedItems = [];
+  public selectedItemsStatements = [];
+  public selectedItemsOthers = [];
+  public allSelectedItems = [];
 
   dropdownSettings: IDropdownSettings;
 
@@ -45,6 +49,7 @@ export class OssCodeComponent implements OnInit {
       this.loadingComments = true;
       this.ossCodingService.getAllComments().subscribe((comments) => {
           this.allComments = comments;
+
           this.loadingComments = false;
           let startVal = Number(this.activeRoute.snapshot.params['start']);
           this.endingComment = Number(this.activeRoute.snapshot.params['end']);
@@ -67,6 +72,19 @@ export class OssCodeComponent implements OnInit {
           this.body = firstComment.body;
           this.commentUrl = firstComment.html_url;
           this.commentId = firstComment.id;
+
+          if(firstComment.selectedCodes !== undefined && firstComment.selectedCodes.length < 0) {
+            firstComment.selectedCodes.forEach((code) => {
+                if(code.item_id <= 13) {
+                  this.selectedItems.push(code);
+                } else if(code.item_id > 13 && code.item_id <= 19){
+                  this.selectedItemsStatements.push(code);
+                } else {
+                  this.selectedItemsStatements.push(code);
+                }
+            });
+          }
+
           this.loadDropdownList();
       });
     } else {
@@ -93,6 +111,19 @@ export class OssCodeComponent implements OnInit {
       this.body = firstComment.body;
       this.commentUrl = firstComment.html_url;
       this.commentId = firstComment.id;
+
+      if(firstComment.selectedCodes !== undefined && firstComment.selectedCodes.length < 0) {
+        firstComment.selectedCodes.forEach((code) => {
+            if(code.item_id <= 13) {
+              this.selectedItems.push(code);
+            } else if(code.item_id > 13 && code.item_id <= 19){
+              this.selectedItemsStatements.push(code);
+            } else {
+              this.selectedItemsStatements.push(code);
+            }
+        });
+      }
+
       this.loadDropdownList();
     }
 
@@ -115,16 +146,6 @@ export class OssCodeComponent implements OnInit {
       { item_id: 12, item_text: 'mentoring request' },
       { item_id: 13, item_text: 'technical related question' }
     ];
-    this.selectedItems = [
-      { item_id: 3, item_text: 'PR review request' },
-      { item_id: 4, item_text: 'code location inquiry' }
-    ];
-    this.dropdownSettings = {
-      singleSelection: false,
-      idField: 'item_id',
-      textField: 'item_text',
-      allowSearchFilter: true
-    };
 
     this.dropdownListStatements = [
       { item_id: 14, item_text: 'coordination statement' },
@@ -141,21 +162,65 @@ export class OssCodeComponent implements OnInit {
       { item_id: 22, item_text: 'Quote' },
       { item_id: 23, item_text: 'Notable' },
     ];
+
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'item_id',
+      textField: 'item_text',
+      allowSearchFilter: true
+    };
+
+    this.populateSelectedCode();
+  }
+
+  public populateSelectedCode(){
+    let currentComment = this.allComments[this.startingComment];
+    if(currentComment.selectedCodes === undefined){
+        this.selectedItems = [];
+        this.selectedItemsStatements = [];
+        this.selectedItemsOthers = [];
+    }
   }
 
   public next() {
-    this.currentComment = this.currentComment + 1;
-    this.router.navigate(['/oss-coding/' + this.startingComment + '/' + this.endingComment + '/' + this.currentComment])
-      .then(() => {
-        window.location.reload();
+    this.userMessage = '';
+    let startVal = Number(this.activeRoute.snapshot.params['start']);
+    if(this.allSelectedItems.length > 0){
+      let currComment = this.allComments[this.currentComment];
+      this.ossCodingService.postCodes(currComment.id, this.allSelectedItems).subscribe((results) => {
+        console.log(results)
+        this.currentComment = this.currentComment + 1;
+        this.router.navigate(['/oss-coding/' + startVal + '/' + this.endingComment + '/' + this.currentComment])
+          .then(() => {
+            window.location.reload();
+          });
+      }, (error) => {
+        this.userMessage = error;
       });
+    } else {
+      console.log('No codes selected, moving on.')
+      this.currentComment = this.currentComment + 1;
+        this.router.navigate(['/oss-coding/' + startVal + '/' + this.endingComment + '/' + this.currentComment])
+          .then(() => {
+            window.location.reload();
+          });
+    }
 
-    // TODO Call DynamoDB and save this comments codes
+
   }
 
   public previous() {
+    let startVal = Number(this.activeRoute.snapshot.params['start']);
+    let previousPage = this.currentComment - 1;
+
+    if(previousPage < startVal) {
+      this.userMessage = "Looks like you're on your first comment!"
+      return;
+    }
+
     this.currentComment = this.currentComment - 1;
-    this.router.navigate(['/oss-coding/' + this.startingComment + '/' + this.endingComment + '/' + this.currentComment])
+
+    this.router.navigate(['/oss-coding/' + startVal + '/' + this.endingComment + '/' + this.currentComment])
       .then(() => {
         window.location.reload();
       });
@@ -165,7 +230,13 @@ export class OssCodeComponent implements OnInit {
     window.open(url, "_blank");
   }
 
-  onItemSelect(item: any) {
-    console.log(item);
+  public onItemSelect(item: any) {
+    this.allSelectedItems.push(item);
+  }
+
+  public onSelectAll(items: any) {
+    items.forEach((item) => {
+      this.allSelectedItems.push(item);
+    });
   }
 }

@@ -56,7 +56,8 @@ export const environment = {
   },
   ossCoding: {
     apiGateway: {
-      comments: 'https://axr3eu7rii.execute-api.us-east-1.amazonaws.com/integration/comments'
+      comments: 'https://axr3eu7rii.execute-api.us-east-1.amazonaws.com/integration/comments',
+      codes: 'https://axr3eu7rii.execute-api.us-east-1.amazonaws.com/integration/codes'
     }
   }
 };
