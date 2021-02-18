@@ -11,6 +11,7 @@ export class OssCommentModel {
   public author_association: string;
   public is_newcomer_comment: string;
   public repo: string;
+  public has_been_coded: boolean;
   public selectedCodes: Array<OssCodeBookModel> = new Array<OssCodeBookModel>();
 }
 

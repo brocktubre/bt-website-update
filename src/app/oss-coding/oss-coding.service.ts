@@ -73,6 +73,7 @@ export class OssCodingService {
           _comment.author_association = comment["author_association"];
           _comment.is_newcomer_comment = comment["is_newcomer_comment"];
           _comment.repo = comment["repo"];
+          _comment.has_been_coded = (comment["has_been_coded"] === 'true');
 
           if(comment["codes"] == undefined) {
             _comment.selectedCodes = comment["codes"];

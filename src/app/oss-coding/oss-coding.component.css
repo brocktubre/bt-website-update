@@ -1,0 +1,21 @@
+.circles > i {
+  font-size: 16px;
+  padding: 2px;
+}
+
+.circles:hover {
+  cursor: pointer;
+}
+
+.coded {
+  color: #3399f3
+}
+
+.coded {
+  color: #3399f3
+}
+
+.circles > .fa {
+  font-family: inherit;
+}
+

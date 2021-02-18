@@ -7,7 +7,7 @@
         <strong><h2> <i class="fas fa-mouse"></i>OSS CODING <span class="text-primary"></span></h2></strong>
       </div>
       <div class="col-md-4 col-md-offset-4 col-sm-12 text-center" style="padding-top: 3%;">
-        <span style="margin-top: 15px;"><strong><a href="/oss-coding">Enter new start and end values.</a></strong></span>
+        <span style="margin-top: 15px;"><strong><a href="/oss-coding">Back to all comments.</a></strong></span>
       </div>
     </div>
     <hr>
@@ -19,8 +19,7 @@
     </div>
     <div *ngIf="!loadingComments && !hideButtons"  class="container" style="min-height: 700px;">
       <div class="col-md-3 col-md-offset-9" style="text-align: right;">
-        <h4>Comment {{currentVal}} of {{end}}.</h4>
-        <h4>Total comments left {{remaining}}.</h4>
+        <h4>Comment {{currentVal}} of {{allComments.length - 1}}.</h4>
       </div>
       <div class="form-group col-md-12 comments-text">
         <!-- <h1 class="text-center"> Select all codes that apply</h1> -->

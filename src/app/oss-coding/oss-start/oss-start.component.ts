@@ -48,8 +48,6 @@ export class OssStartComponent implements OnInit {
     this.hideButtons = false;
     this.allComments = this.ossCodingService.getAllCommentsSingleton();
     this.currentVal = Number(localStorage.getItem('current_val'));
-    this.end = Number(localStorage.getItem('end_comment'));
-    this.remaining = this.end - this.currentVal;
     const current = this.activeRoute.snapshot.params['id'];
     this.loadingComments = true;
 
@@ -139,10 +137,10 @@ export class OssStartComponent implements OnInit {
 
   public next() {
     this.userMessage = '';
+    const index = this.allComments.findIndex(x => x.id === this.currentComment.id);
 
     if(this.allSelectedItems.length == 0) {
       // TODO move on
-      const index = this.allComments.findIndex(x => x.id === this.currentComment.id);
       localStorage.setItem('current_val', String(index + 1))
       this.router.navigate(['/oss-coding/' + this.allComments[index + 1].id])
         .then(() => {
@@ -162,7 +160,7 @@ export class OssStartComponent implements OnInit {
     this.ossCodingService.postCodes(this.currentComment).subscribe((response) => {
       // Code table was successfully updated
       console.log(response);
-      const index = this.allComments.findIndex(x => x.id === this.currentComment.id);
+      debugger;
       localStorage.setItem('current_val', String(index + 1))
       this.router.navigate(['/oss-coding/' + this.allComments[index + 1].id])
         .then(() => {
@@ -178,11 +176,9 @@ export class OssStartComponent implements OnInit {
 
   public previous() {
     this.userMessage = '';
-    this.startVal = Number(localStorage.getItem('start_comment'));
     this.currentVal = Number(localStorage.getItem('current_val'));
-    const prevVal = this.currentVal - 1;
 
-    if(prevVal < this.startVal ) {
+    if(this.currentVal == 0) {
       this.userMessage = "Looks like you're on your first comment!"
       return;
     }
