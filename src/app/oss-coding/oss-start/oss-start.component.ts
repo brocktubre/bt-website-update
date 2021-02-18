@@ -73,7 +73,6 @@ export class OssStartComponent implements OnInit {
     this.currentComment = comment;
 
     comment.selectedCodes.forEach((code) => {
-      debugger;
       this.allSelectedItems.push(code);
       if(code.item_id <= 13) {
         this.selectedItems.push(code);
@@ -130,7 +129,8 @@ export class OssStartComponent implements OnInit {
       singleSelection: false,
       idField: 'item_id',
       textField: 'item_text',
-      allowSearchFilter: true
+      allowSearchFilter: true,
+      enableCheckAll: false
     };
 
     this.populateSelectedCode();
@@ -238,7 +238,6 @@ export class OssStartComponent implements OnInit {
   }
 
   public onSelectAll(items: any) {
-    debugger;
     items.forEach((item) => {
       this.allSelectedItems.push(item);
     });
