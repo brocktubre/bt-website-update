@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { OssCodingService } from '../oss-coding.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-oss-start',
@@ -21,6 +22,7 @@ export class OssStartComponent implements OnInit {
   public startVal: number;
   public end: number;
   public remaining: number;
+  public myForm: FormGroup;
 
 
 
@@ -36,7 +38,8 @@ export class OssStartComponent implements OnInit {
 
   constructor(private activeRoute: ActivatedRoute,
               private ossCodingService: OssCodingService,
-              private router: Router) {
+              private router: Router,
+              private fb: FormBuilder) {
     this.year = new Date().getFullYear();
   }
 
@@ -78,10 +81,11 @@ export class OssStartComponent implements OnInit {
       }
     });
 
-    this.selectedItems = [
-      this.ossCodingService.staticOssBookModel[1],
-      this.ossCodingService.staticOssBookModel[2]
-    ]
+    this.myForm = this.fb.group({
+      questions: [this.selectedItems],
+      statements: [this.selectedItemsOthers],
+      other: [this.selectedItemsOthers],
+    });
 
     this.loadDropdownList();
   }

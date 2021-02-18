@@ -30,54 +30,57 @@
         <br />
         <p><strong> {{currentComment.body}} </strong></p>
         <br/>
-        <div class="row">
-          <div class="col-md-4 col-sm-12">
-            <p> Current Question Codes: </p>
+        <form [formGroup]="myForm">
+          <div class="row">
+            <div class="col-md-4 col-sm-12">
+              <p> Current Question Codes: </p>
+            </div>
+            <div class="col-md-8 col-sm-12">
+                <!-- [(ngModel)]="selectedItems" -->
+                <ng-multiselect-dropdown
+                  [placeholder]="'Select appropriate codes'"
+                  formControlName="questions"
+                  [settings]="dropdownSettings"
+                  [data]="dropdownList"
+                  (onSelect)="onItemSelect($event)"
+                  (onSelectAll)="onSelectAll($event)"
+                >
+                </ng-multiselect-dropdown>
+            </div>
           </div>
-          <div class="col-md-8 col-sm-12">
-            <ng-multiselect-dropdown
-              [placeholder]="'Select appropriate codes'"
-              [(ngModel)]="selectedItems"
-              [settings]="dropdownSettings"
-              [data]="dropdownList"
-              (onSelect)="onItemSelect($event)"
-              (onSelectAll)="onSelectAll($event)"
-            >
-            </ng-multiselect-dropdown>
+          <div class="row">
+            <div class="col-md-4 col-sm-12">
+              <p> Current Statement Codes: </p>
+            </div>
+            <div class="col-md-8 col-sm-12">
+              <ng-multiselect-dropdown
+                [placeholder]="'Select appropriate codes'"
+                [settings]="dropdownSettings"
+                [data]="dropdownListStatements"
+                formControlName="statements"
+                (onSelect)="onItemSelect($event)"
+                (onSelectAll)="onSelectAll($event)"
+              >
+              </ng-multiselect-dropdown>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4 col-sm-12">
-            <p> Current Statement Codes: </p>
+          <div class="row">
+            <div class="col-md-4 col-sm-12">
+              <p> Other Codes: </p>
+            </div>
+            <div class="col-md-8 col-sm-12">
+              <ng-multiselect-dropdown
+                [placeholder]="'Select appropriate codes'"
+                [settings]="dropdownSettings"
+                [data]="dropdownListOther"
+                formControlName="other"
+                (onSelect)="onItemSelect($event)"
+                (onSelectAll)="onSelectAll($event)"
+              >
+              </ng-multiselect-dropdown>
+            </div>
           </div>
-          <div class="col-md-8 col-sm-12">
-            <ng-multiselect-dropdown
-              [placeholder]="'Select appropriate codes'"
-              [settings]="dropdownSettings"
-              [data]="dropdownListStatements"
-              [(ngModel)]="selectedItemsStatements"
-              (onSelect)="onItemSelect($event)"
-              (onSelectAll)="onSelectAll($event)"
-            >
-            </ng-multiselect-dropdown>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4 col-sm-12">
-            <p> Other Codes: </p>
-          </div>
-          <div class="col-md-8 col-sm-12">
-            <ng-multiselect-dropdown
-              [placeholder]="'Select appropriate codes'"
-              [settings]="dropdownSettings"
-              [data]="dropdownListOther"
-              [(ngModel)]="selectedItemsOther"
-              (onSelect)="onItemSelect($event)"
-              (onSelectAll)="onSelectAll($event)"
-            >
-            </ng-multiselect-dropdown>
-          </div>
-        </div>
+        </form>
         <div class="row" *ngIf="userMessage" style="padding-top: 25px;">
           <div class="col-md-12 text-center">
             <p class="text-danger"><strong>{{userMessage}}</strong></p>
