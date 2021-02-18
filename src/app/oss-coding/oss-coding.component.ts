@@ -15,9 +15,6 @@ export class OssCodingComponent implements OnInit {
   public allComments: Array<OssCommentModel>;
   public inputSubmitMessage: string = '';
 
-  // @ViewChild('startingComment') startingComment: ElementRef;
-  // @ViewChild('endingComment') endingComment: ElementRef;
-
   constructor(private ossCodingService: OssCodingService, private router: Router) {
     this.year = new Date().getFullYear();
   }
@@ -39,29 +36,5 @@ export class OssCodingComponent implements OnInit {
     localStorage.setItem('current_val', String(index));
     this.router.navigate(['/oss-coding/' + comment.id]);
   }
-
-  // public startCoding(){
-  //   this.inputSubmitMessage = '';
-  //   try {
-  //     const startingComment = Number(this.startingComment.nativeElement.value);
-  //     const endingComment = Number(this.endingComment.nativeElement.value);
-
-  //     if(startingComment >= endingComment || startingComment < 0 || endingComment < 0 || endingComment >= this.allComments.length) {
-  //       this.inputSubmitMessage = 'Please enter valid values. Between 0 and ' + (this.allComments.length - 1) +'.';
-  //       return;
-  //     }
-
-  //     localStorage.setItem('start_comment', String(startingComment));
-  //     localStorage.setItem('current_val', String(startingComment));
-  //     localStorage.setItem('end_comment', String(endingComment));
-
-  //     const startingCommentId = this.allComments[startingComment].id;
-
-  //     this.router.navigate(['/oss-coding/' + startingCommentId]);
-  //   } catch (error) {
-  //     this.inputSubmitMessage = 'Please enter valid values. Between 0 and ' + (this.allComments.length - 1) +'.';
-  //     return;
-  //   }
-  // }
 
 }

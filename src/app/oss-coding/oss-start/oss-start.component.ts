@@ -73,18 +73,19 @@ export class OssStartComponent implements OnInit {
     this.currentComment = comment;
 
     comment.selectedCodes.forEach((code) => {
+      this.allSelectedItems.push(code);
       if(code.item_id <= 13) {
         this.selectedItems.push(code);
       } else if(code.item_id > 13 && code.item_id <= 19){
         this.selectedItemsStatements.push(code);
       } else {
-        this.selectedItemsStatements.push(code);
+        this.selectedItemsOthers.push(code);
       }
     });
 
     this.myForm = this.fb.group({
       questions: [this.selectedItems],
-      statements: [this.selectedItemsOthers],
+      statements: [this.selectedItemsStatements],
       other: [this.selectedItemsOthers],
     });
 
@@ -142,7 +143,13 @@ export class OssStartComponent implements OnInit {
     this.userMessage = '';
     const index = this.allComments.findIndex(x => x.id === this.currentComment.id);
 
-    if(this.allSelectedItems.length == 0) {
+    if(this.allComments[index].has_been_coded === true && this.allSelectedItems.length == 0) {
+        this.currentComment.selectedCodes = [];
+        this.updateCommentCodes('next');
+        return;
+    }
+
+    if(this.allComments[index].has_been_coded === false && this.allSelectedItems.length == 0) {
       // TODO move on
       localStorage.setItem('current_val', String(index + 1))
       this.router.navigate(['/oss-coding/' + this.allComments[index + 1].id])
@@ -158,36 +165,52 @@ export class OssStartComponent implements OnInit {
         _code.item_text = code["item_text"];
         this.currentComment.selectedCodes.push(_code);
     });
+    this.updateCommentCodes('next');
+  }
 
-
+  private updateCommentCodes(direction: string) {
+    const index = this.allComments.findIndex(x => x.id === this.currentComment.id);
     this.ossCodingService.postCodes(this.currentComment).subscribe((response) => {
       // Code table was successfully updated
       console.log(response);
-      localStorage.setItem('current_val', String(index + 1))
-      this.router.navigate(['/oss-coding/' + this.allComments[index + 1].id])
-        .then(() => {
-          window.location.reload();
-      });
+      if(direction === 'next'){
+        localStorage.setItem('current_val', String(index + 1))
+        this.router.navigate(['/oss-coding/' + this.allComments[index + 1].id])
+          .then(() => {
+            window.location.reload();
+        });
+      } else if(direction === 'prev') {
+        localStorage.setItem('current_val', String(index - 1))
+        this.router.navigate(['/oss-coding/' + this.allComments[index - 1].id])
+          .then(() => {
+            window.location.reload();
+        });
+      }
+
 
     }, (error) => {
         this.userMessage = error;
     });
-
-
   }
 
   public previous() {
     this.userMessage = '';
     this.currentVal = Number(localStorage.getItem('current_val'));
+    const index = this.allComments.findIndex(x => x.id === this.currentComment.id);
 
     if(this.currentVal == 0) {
       this.userMessage = "Looks like you're on your first comment!"
       return;
     }
 
-    if(this.allSelectedItems.length == 0) {
+    if(this.allComments[index].has_been_coded === true && this.allSelectedItems.length == 0) {
+      this.currentComment.selectedCodes = [];
+      this.updateCommentCodes('prev');
+      return;
+    }
+
+    if(this.allComments[index].has_been_coded === false && this.allSelectedItems.length == 0) {
       // TODO move on
-      const index = this.allComments.findIndex(x => x.id === this.currentComment.id);
       localStorage.setItem('current_val', String(index - 1))
       this.router.navigate(['/oss-coding/' + this.allComments[index - 1].id]).then(() => {
           window.location.reload();
@@ -202,20 +225,7 @@ export class OssStartComponent implements OnInit {
         this.currentComment.selectedCodes.push(_code);
     });
 
-
-    this.ossCodingService.postCodes(this.currentComment).subscribe((response) => {
-      // Code table was successfully updated
-      console.log(response);
-      const index = this.allComments.findIndex(x => x.id === this.currentComment.id);
-      localStorage.setItem('current_val', String(index - 1))
-      this.router.navigate(['/oss-coding/' + this.allComments[index - 1].id])
-        .then(() => {
-          window.location.reload();
-      });
-
-    }, (error) => {
-        this.userMessage = error;
-    });
+    this.updateCommentCodes('prev');
   }
 
   public goToLink(url: string){
@@ -230,6 +240,13 @@ export class OssStartComponent implements OnInit {
     items.forEach((item) => {
       this.allSelectedItems.push(item);
     });
+  }
+
+  public onDeSelect(item: any) {
+    const index = this.allSelectedItems.findIndex(x => x.item_id === item.item_id);
+    if (index > -1) {
+      this.allSelectedItems.splice(index, 1);
+    }
   }
 
 }
