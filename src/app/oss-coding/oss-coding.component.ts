@@ -25,6 +25,8 @@ export class OssCodingComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadingComments = true;
+    localStorage.removeItem('start_comment');
+    localStorage.removeItem('end_comment');
 
     this.ossCodingService.getAllComments().subscribe((comments) => {
         this.allComments = comments;
@@ -42,7 +44,15 @@ export class OssCodingComponent implements OnInit {
       return;
     }
 
-    this.router.navigate(['/oss-coding/' + startingComment + '/' + endingComment + '/' + startingComment]);
+    localStorage.setItem('start_comment', String(startingComment));
+    localStorage.setItem('current_val', String(startingComment));
+    localStorage.setItem('end_comment', String(endingComment));
+
+    const startingCommentId = this.allComments[startingComment].id;
+
+    debugger;
+
+    this.router.navigate(['/oss-coding/' + startingCommentId]);
   }
 
 }

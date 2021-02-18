@@ -68,7 +68,7 @@ export class OssCodingService {
     return sendResult.asObservable();
   }
 
-  public postCodes(id: number, codes: any): Observable<String> {
+  public postCodes(comment: OssCommentModel): Observable<String> {
     const sendResult = new Subject<String>();
 
     let headers = new HttpHeaders();
@@ -78,17 +78,58 @@ export class OssCodingService {
     };
     const postUrl = environment.ossCoding.apiGateway.codes;
 
-    const payload = {
-      'id': id,
-      'codes': JSON.stringify(codes)
-    }
-    const finalPayload = JSON.stringify(payload);
-    debugger;
-    const postCodesApi = this.http.post(postUrl, finalPayload, httpOptions);
+    const payload = { comment }
+    const postCodesApi = this.http.post(postUrl, payload, httpOptions);
     postCodesApi.subscribe((result: any) => {
         sendResult.next(result);
     }, (error) => {
       sendResult.error('There was an error coding the comment.');
+    });
+
+    return sendResult.asObservable();
+  }
+
+  public getCommentById(id: string): Observable<OssCommentModel> {
+    const sendResult = new Subject<OssCommentModel>();
+
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json;');
+    const httpOptions = {
+      headers: headers
+    };
+    const payload = {
+      'id': id
+    };
+    const getUrl = environment.ossCoding.apiGateway.comment_by_id;
+    const getSingleCommentApi = this.http.post(getUrl, payload, httpOptions);
+
+    getSingleCommentApi.subscribe((mapping: any) => {
+
+      let _comment = new OssCommentModel();
+      let comment = mapping[0];
+      let codes = mapping[1];
+
+      _comment.body = comment["body"];
+      _comment.created_at = comment["created_at"];
+      _comment.html_url = comment["html_url"];
+      _comment.id = comment["id"];
+      _comment.issue_url = comment["issue_url"];
+      _comment.url = comment["url"];
+      _comment.user_id = comment["user_id"];
+      _comment.user_login = comment["user_login"];
+      _comment.user_type = comment["user_type"];
+      _comment.author_association = comment["author_association"];
+      _comment.is_newcomer_comment = comment["is_newcomer_comment"];
+      _comment.repo = comment["repo"];
+
+      if(codes.length > 0) {
+        let codesObj =  new OssCodeBookModel();
+        codesObj.item_id = codes["item_id"]
+        codesObj.item_text = codes["item_text"]
+        _comment.selectedCodes.push(codesObj);
+      }
+
+      sendResult.next(_comment);
     });
 
     return sendResult.asObservable();

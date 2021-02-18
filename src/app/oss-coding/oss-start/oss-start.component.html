@@ -18,13 +18,17 @@
       <p class="text-success"><strong>{{userMessage}}</strong></p>
     </div>
     <div *ngIf="!loadingComments && !hideButtons"  class="container" style="min-height: 700px;">
+      <div class="col-md-3 col-md-offset-9" style="text-align: right;">
+        <h4>Comment {{currentVal}} of {{end}}.</h4>
+        <h4>Total comments left {{remaining}}.</h4>
+      </div>
       <div class="form-group col-md-12 comments-text">
         <!-- <h1 class="text-center"> Select all codes that apply</h1> -->
-        <p> Comment ID: {{commentId}}</p>
-        <p> User Login: {{userLogin}}</p>
-        <p> Comment URL: <a (click)="goToLink(commentUrl)">{{commentUrl}}</a></p>
+        <p> Comment ID: {{currentComment.id}}</p>
+        <p> User Login: {{currentComment.user_login}}</p>
+        <p> Comment URL: <a (click)="goToLink(currentComment.html_url)">{{currentComment.html_url}}</a></p>
         <br />
-        <p><strong> {{body}} </strong></p>
+        <p><strong> {{currentComment.body}} </strong></p>
         <br/>
         <div class="row">
           <div class="col-md-4 col-sm-12">
