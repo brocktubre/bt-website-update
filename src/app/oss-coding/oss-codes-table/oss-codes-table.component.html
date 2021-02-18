@@ -1,0 +1,193 @@
+
+<ul class="nav nav-tabs tabs">
+  <li class="nav-tiem" [ngClass]="{'active': isQuestionActive}">
+    <a class="nav-link table-tab" (click)="toggleTable('question')"><strong>Questions</strong></a>
+  </li>
+  <li class="nav-tiem" [ngClass]="{'active': isStatementActive}">
+    <a class="nav-link table-tab" (click)="toggleTable('statement')"><strong>Statements</strong></a>
+  </li>
+  <li class="nav-tiem" [ngClass]="{'active': isOtherActive}">
+    <a class="nav-link table-tab" (click)="toggleTable('other')"><strong>Other</strong></a>
+  </li>
+</ul>
+<div *ngIf="isQuestionActive">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th class="col-md-3">Code</th>
+        <th class="col-md-4">Description</th>
+        <th class="col-md-6">Examples</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>newcomer assignment request</td>
+        <td>When the newcomer specifically asks to be assigned to an issue or if they ask if they could work on that specific issue.</td>
+        <td>"Hi, I'm a newcomer to golang and I'd like to work on this issue. <strong>Can I be assigned with this issue?" "Can I send a PR for this issue?"</strong></td>
+      </tr>
+      <tr>
+        <td>acceptance inquiry</td>
+        <td>The newcomer is asking if he or she does XYZ, would the PR be accepted.</td>
+        <td>"Do you have any comments on <strong>what changes would be most likely to be accepted? I am reluctant to do any work on this if it is going to be rejected or ignored."</strong></td>
+      </tr>
+      <tr>
+        <td>issue status inquiry</td>
+        <td>When someone wants to know if someone else is already working on an issue, or if no one is assigned to the issue.</td>
+        <td>"@kkang2097 <strong>hey is it done?"</strong><br/> "Hey Guys, <strong>Is the work done?"</strong></td>
+      </tr>
+      <tr>
+        <td>starting guidance request</td>
+        <td>Someone seeking guidance about how to start, the contribution process, or high level help on how to proceed.</td>
+        <td>"Hi @Griffintaur, This is a pretty cool game, I'd like to help contribute.<strong>Can you give me more context or where I can start with this? Thanks!"</strong><br/>
+          "Hmm, okay. <strong>Is there any guides you can point me to for how to contribute to open source projects?"</strong><br/>
+          "I want to work on this issue. <strong>Can you please guide me more about the same?"</strong></td>
+      </tr>
+      <tr>
+        <td>coordination inquiry</td>
+        <td>Asking when something needs to be done or if a specific date for finishing the work is okay.</td>
+        <td><strong>"Is next Sunday OK for me to finish?"</strong></td>
+      </tr>
+      <tr>
+        <td>PR review request</td>
+        <td>Asking for someone to review a pull request.</td>
+        <td>@erezrokah <strong>Please review #3597.</strong></td>
+      </tr>
+      <tr>
+        <td>code location inquiry</td>
+        <td>Asking information about which artifact needs to be changed to fix the issue; asking if the file they are changing are the correct ones.</td>
+        <td>"Hi @owickstrom, I want to start contributing to the repository beginning with this but the referenced file seems to be obsolete already. <strong>Can you identify where the function was moved? Thanks!"</strong></td>
+      </tr>
+      <tr>
+        <td>validation request</td>
+        <td>The newcomer shares a potential solution to the issue and seeks validation from the community.</td>
+        <td>@raphaelm So as per my understanding, I should be using one script tag inside the index.html page with the JSON template and load variable data.<strong> Am I on the right track?</strong></td>
+      </tr>
+      <tr>
+        <td>resource inquiry</td>
+        <td>The newcomer seeks resources such as documentation or tools.</td>
+        <td>I've contributed to repos before <strong>using the tooling available on the website</strong>, I just haven't used the git command-line. <br />
+
+          The Contributing Guidelines page doesn't appear to highlight all the project dependencies. <strong>Is there any documentation on that?"</strong></td>
+      </tr>
+      <tr>
+        <td>code review request</td>
+        <td>Newcomers requesting input on the code that they are sharing in the comment. (This is different from PR review request because there is no PR in place, an the newcomer is asking if feedback to the code they are working on)</td>
+        <td>@scrthq So just to confirm, I will add an entry there similar to json.<br/>
+          <strong>[code bit removed]</strong> <br/>something like this. will this be fine? Also I was checking this PR #59779 reading comments there, I thought this bug does not needs any fixing. <strong>Is the fix i am trying to do correct? And does it needs fixing?</strong>
+
+          @raphaelm Does something like this make sense? I'm not sure how the event name is being passed to the template.
+          <strong>[CODE CHUNK removed]</strong>
+        </td>
+      </tr>
+      <tr>
+        <td>workspace setup question</td>
+        <td>Asking support to fix issues related to building/setting up the local environment. May involve error codes when compiling, issues with versions, libraries, etc.</td>
+        <td>It is building with the following command:<br/>
+          `rustup run nightly cargo build --features cli`<br/>
+
+         @jywarren I tried reinstalling without Solr, but I'm still having issues on my mac.<br/>
+
+          Hi,
+          I did the build successfully. I am getting the following output:<br/>
+          Hi Guys, where can I find local setup instructions to start contributing to this ticket/project?
+        </td>
+      </tr>
+      <tr>
+        <td>submission process inquiry</td>
+        <td>Specifically asking how to properly submit contribution (e.g. pull request)</td>
+        <td>"@michaelwoerister I just created the PR to share the code. I compiled the project and I ran the test (using `./x.py test`). <strong>Unfortunately, I don't know how to test my changes (which is why I put a "WiP")...Is it possible to obtain a simple example of "procedure", in order to test my changes please? Thanks a lot.</strong>
+        </td>
+      </tr>
+      <tr>
+        <td>mentoring request</td>
+        <td>Asking for general guidance from another person or contributor.</td>
+        <td>I would like to take this up. This is going to be my first contribution. Is it still available? <strong>Also can someone guide me where can I start to work on this?</strong></td>
+      </tr>
+      <tr>
+        <td>technical related question</td>
+        <td>When someone is asking technical questions about the code or having issues with something specific about the project.</td>
+        <td>I am getting this error when trying to call my <strong>yoloFormater.toYOLO() function defined inside my yolo.js file. Any idea what the issue is, and how I might solve it?</strong><br/>
+
+          Where is the line that separates <strong>"good compiler messages" and "user must know the tool drawn"?</strong></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="isStatementActive">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th class="col-md-3">Code</th>
+        <th class="col-md-4">Description</th>
+        <th class="col-md-6">Examples</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>coordination statement</td>
+        <td>Here the newcomer is mentioning dates, schedules, or planning task completion</td>
+        <td>"I will work on that issue after work, in order to submit a PR + code review <strong> tomorrow morning."</strong></td>
+      </tr>
+      <tr>
+        <td>knowledge share</td>
+        <td>The newcomer shares information about either a library or a resource. They also might be answering a questions about why they did what they did.  Here they are sharing new information with the project team.</td>
+        <td>"I took a different approach and modified `LabelEncoder` to track the class labels and wrote a wrapper `Estimator` class that encapsulates calling `transform` the labels in `fit` and `inverse_transform` in `predict`. It works on all estimators and is much easier than modifying them all separately--all it does is map integers to classes and maps them back later. (Also I have an `Ensemble` class that uses `Estimator`s and has a voting or averaging function on calls to `predict`.)"</td>
+      </tr>
+      <tr>
+        <td>suggestion</td>
+        <td>When someone suggests to change or do something differently. </td>
+        <td><strong>Suggestion: rather than turning setters into public, perhaps have a factory method that forces to pass in all the parameters to initialize a new </strong>`EventData`? Same with `SystemPropertiesCollection`, <br/>
+
+          <strong>Maybe this approach would work out for scikit. </strong>It solves all the issues I had with class labels / ensembles and it very little code.</td>
+      </tr>
+      <tr>
+        <td>grateful</td>
+        <td>Saying "thank you", grateful, saying something like "that was helpful"</td>
+        <td>@faho, @pickfire: <strong> Thank you </strong>both for your comments. </td>
+      </tr>
+      <tr>
+        <td>acknowledgement</td>
+        <td>saying something like "okay" or "that makes sense"</td>
+        <td><strong>"Ok, I understand."</strong></td>
+      </tr>
+      <tr>
+        <td>general statement</td>
+        <td>The newcomer is just saying something.</td>
+        <td>"I was browsing through previous year's GSOC projects and happened to come across this !. Also, a friend of mine (who also contributes to this project) told me about this."</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="isOtherActive">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th class="col-md-3">Code</th>
+        <th class="col-md-4">Description</th>
+        <th class="col-md-6">Examples</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>False Positive</td>
+        <td>The text is not from a newcomer</td>
+        <td>When the member is clearly NOT a newcomer. </td>
+      </tr>
+      <tr>
+        <td>Discuss</td>
+        <td>The newcomer is asking if he or she does XYZ, would the PR be accepted.</td>
+        <td>When you are unsure & we will discuss as a team later.</td>
+      </tr>
+      <tr>
+        <td>Quote</td>
+        <td>Something you think should be in the paper.</td>
+        <td>Something you think should be in the paper.</td>
+      </tr>
+      <tr>
+        <td>Notable</td>
+        <td>Something that appears to you that needs a code.</td>
+        <td>Something that appears to you that needs a code.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -6,9 +6,10 @@ import { OssCodingComponent } from './oss-coding.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { OssStartComponent } from './oss-start/oss-start.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { OssCodesTableComponent } from './oss-codes-table/oss-codes-table.component';
 
 @NgModule({
-  declarations: [OssCodingComponent, OssStartComponent],
+  declarations: [OssCodingComponent, OssStartComponent, OssCodesTableComponent],
   imports: [
     CommonModule,
     BaseModule,

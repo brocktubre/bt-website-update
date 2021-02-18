@@ -1,0 +1,13 @@
+.tabs > li:hover{
+  cursor: pointer;
+}
+
+a.nav-link{
+  background-color: #3399f3;
+  padding-right: 10px;
+  font-size: inherit;
+}
+
+.table-tab {
+  font-size: inherit;
+}

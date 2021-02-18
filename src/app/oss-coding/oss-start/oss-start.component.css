@@ -1,3 +1,7 @@
 .comments-text p {
   font-size: 25px;
 }
+
+.comments-text a:hover {
+  cursor: pointer;
+}

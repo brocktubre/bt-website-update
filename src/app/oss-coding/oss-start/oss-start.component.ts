@@ -61,6 +61,9 @@ export class OssStartComponent implements OnInit {
         } else {
           this.loadingComments = false;
         }
+    }, (error) => {
+      console.error(error);
+      this.router.navigate(['/oss-coding/']);
     });
 
 
@@ -160,7 +163,6 @@ export class OssStartComponent implements OnInit {
     this.ossCodingService.postCodes(this.currentComment).subscribe((response) => {
       // Code table was successfully updated
       console.log(response);
-      debugger;
       localStorage.setItem('current_val', String(index + 1))
       this.router.navigate(['/oss-coding/' + this.allComments[index + 1].id])
         .then(() => {

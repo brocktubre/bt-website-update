@@ -1,23 +1,23 @@
 <app-navbar></app-navbar>
 <!-- Content for the main page -->
 <div class="container-fluid background" style="padding: 0;" >
-  <div class="container" style="padding-bottom: 50px;">
+  <div class="container" style="padding-bottom: 0px;">
     <div class="row">
       <div class="col-md-4 col-sm-12">
         <strong><h2> <i class="fas fa-mouse"></i>OSS CODING <span class="text-primary"></span></h2></strong>
       </div>
       <div class="col-md-4 col-md-offset-4 col-sm-12 text-center" style="padding-top: 3%;">
-        <span style="margin-top: 15px;"><strong><a href="/oss-coding">Back to all comments.</a></strong></span>
+        <span style="margin-top: 15px;"><strong><a href="/oss-coding">Back to all comments</a></strong></span>
       </div>
     </div>
     <hr>
-    <div *ngIf="loadingComments"  class="container text-center" style="min-height: 700px;">
+    <div *ngIf="loadingComments"  class="container text-center">
       <i class="fas fa-circle-notch fa-spin" style="font-size:50px"></i>
     </div>
     <div *ngIf="hideButtons"  class="container text-center" style="min-height: 700px;">
       <p class="text-success"><strong>{{userMessage}}</strong></p>
     </div>
-    <div *ngIf="!loadingComments && !hideButtons"  class="container" style="min-height: 700px;">
+    <div *ngIf="!loadingComments && !hideButtons"  class="container">
       <div class="col-md-3 col-md-offset-9" style="text-align: right;">
         <h4>Comment {{currentVal}} of {{allComments.length - 1}}.</h4>
       </div>
@@ -85,7 +85,7 @@
             <p class="text-danger"><strong>{{userMessage}}</strong></p>
           </div>
         </div>
-        <div class="row" style="padding-top: 100px;">
+        <div class="row" style="padding-top: 50px;">
           <div class="col-md-6">
             <button class="btn btn-primary form-control" (click)="previous()"><i class="fas fa-chevron-left"></i> Previous Comment </button>
           </div>
@@ -95,6 +95,10 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="container" style="padding-bottom: 50px;" *ngIf="!loadingComments">
+    <hr>
+    <app-oss-codes-table></app-oss-codes-table>
   </div>
 
 

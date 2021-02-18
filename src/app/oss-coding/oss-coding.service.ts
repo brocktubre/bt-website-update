@@ -287,8 +287,10 @@ export class OssCodingService {
         codesObj.item_id = this.staticOssBookModel[23].item_id
         codesObj.item_text = this.staticOssBookModel[23].item_text
       }
-      debugger;
       sendResult.next(_comment);
+    }, (error) => {
+      debugger;
+      sendResult.error(error);
     });
 
     return sendResult.asObservable();
