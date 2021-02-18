@@ -130,7 +130,8 @@ export class OssStartComponent implements OnInit {
       idField: 'item_id',
       textField: 'item_text',
       allowSearchFilter: true,
-      enableCheckAll: false
+      enableCheckAll: false,
+      maxHeight: 500
     };
 
     this.populateSelectedCode();
