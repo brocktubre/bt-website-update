@@ -37,9 +37,9 @@
           <div class="col-md-8 col-sm-12">
             <ng-multiselect-dropdown
               [placeholder]="'Select appropriate codes'"
+              [(ngModel)]="selectedItems"
               [settings]="dropdownSettings"
               [data]="dropdownList"
-              [(ngModel)]="selectedItems"
               (onSelect)="onItemSelect($event)"
               (onSelectAll)="onSelectAll($event)"
             >

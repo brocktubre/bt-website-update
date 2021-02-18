@@ -18,6 +18,7 @@ export class OssStartComponent implements OnInit {
   public hideButtons: boolean;
   public userMessage: string;
   public currentVal: number;
+  public startVal: number;
   public end: number;
   public remaining: number;
 
@@ -77,40 +78,45 @@ export class OssStartComponent implements OnInit {
       }
     });
 
+    this.selectedItems = [
+      this.ossCodingService.staticOssBookModel[1],
+      this.ossCodingService.staticOssBookModel[2]
+    ]
+
     this.loadDropdownList();
   }
 
   public loadDropdownList() {
     this.dropdownList = [
-      { item_id: 1, item_text: 'newcomer assignment request' },
-      { item_id: 2, item_text: 'acceptance inquiry' },
-      { item_id: 3, item_text: 'issue status inquiry' },
-      { item_id: 4, item_text: 'starting guidance request' },
-      { item_id: 5, item_text: 'coordination inquiry' },
-      { item_id: 6, item_text: 'PR review request' },
-      { item_id: 7, item_text: 'code location inquiry' },
-      { item_id: 8, item_text: 'validation request' },
-      { item_id: 9, item_text: 'resource inquiry' },
-      { item_id: 10, item_text: 'workspace setup question' },
-      { item_id: 11, item_text: 'submission process inquiry' },
-      { item_id: 12, item_text: 'mentoring request' },
-      { item_id: 13, item_text: 'technical related question' }
+      this.ossCodingService.staticOssBookModel[1],
+      this.ossCodingService.staticOssBookModel[2],
+      this.ossCodingService.staticOssBookModel[3],
+      this.ossCodingService.staticOssBookModel[4],
+      this.ossCodingService.staticOssBookModel[5],
+      this.ossCodingService.staticOssBookModel[6],
+      this.ossCodingService.staticOssBookModel[7],
+      this.ossCodingService.staticOssBookModel[8],
+      this.ossCodingService.staticOssBookModel[9],
+      this.ossCodingService.staticOssBookModel[10],
+      this.ossCodingService.staticOssBookModel[11],
+      this.ossCodingService.staticOssBookModel[12],
+      this.ossCodingService.staticOssBookModel[13]
     ];
 
     this.dropdownListStatements = [
-      { item_id: 14, item_text: 'coordination statement' },
-      { item_id: 15, item_text: 'knowledge share' },
-      { item_id: 16, item_text: 'suggestion' },
-      { item_id: 17, item_text: 'grateful' },
-      { item_id: 18, item_text: 'acknowledgement' },
-      { item_id: 19, item_text: 'general statement' },
+      this.ossCodingService.staticOssBookModel[14],
+      this.ossCodingService.staticOssBookModel[15],
+      this.ossCodingService.staticOssBookModel[16],
+      this.ossCodingService.staticOssBookModel[17],
+      this.ossCodingService.staticOssBookModel[18],
+      this.ossCodingService.staticOssBookModel[19]
     ];
 
     this.dropdownListOther = [
-      { item_id: 20, item_text: 'False Positive' },
-      { item_id: 21, item_text: 'Discuss' },
-      { item_id: 22, item_text: 'Quote' },
-      { item_id: 23, item_text: 'Notable' },
+      this.ossCodingService.staticOssBookModel[20],
+      this.ossCodingService.staticOssBookModel[21],
+      this.ossCodingService.staticOssBookModel[22],
+      this.ossCodingService.staticOssBookModel[23]
     ];
 
     this.dropdownSettings = {
@@ -133,8 +139,12 @@ export class OssStartComponent implements OnInit {
     if(this.allSelectedItems.length == 0) {
       // TODO move on
       const index = this.allComments.findIndex(x => x.id === this.currentComment.id);
-      this.router.navigate(['/oss-coding/' + this.allComments[index + 1].id]);
-      return
+      localStorage.setItem('current_val', String(index + 1))
+      this.router.navigate(['/oss-coding/' + this.allComments[index + 1].id])
+        .then(() => {
+          window.location.reload();
+      });
+      return;
     }
 
     this.allSelectedItems.forEach((code) => {
@@ -148,7 +158,6 @@ export class OssStartComponent implements OnInit {
     this.ossCodingService.postCodes(this.currentComment).subscribe((response) => {
       // Code table was successfully updated
       console.log(response);
-      debugger;
       const index = this.allComments.findIndex(x => x.id === this.currentComment.id);
       localStorage.setItem('current_val', String(index + 1))
       this.router.navigate(['/oss-coding/' + this.allComments[index + 1].id])
@@ -164,20 +173,47 @@ export class OssStartComponent implements OnInit {
   }
 
   public previous() {
-    // let startVal = Number(this.activeRoute.snapshot.params['start']);
-    // let previousPage = this.currentComment - 1;
+    this.userMessage = '';
+    this.startVal = Number(localStorage.getItem('start_comment'));
+    this.currentVal = Number(localStorage.getItem('current_val'));
+    const prevVal = this.currentVal - 1;
 
-    // if(previousPage < startVal) {
-    //   this.userMessage = "Looks like you're on your first comment!"
-    //   return;
-    // }
+    if(prevVal < this.startVal ) {
+      this.userMessage = "Looks like you're on your first comment!"
+      return;
+    }
 
-    // this.currentComment = this.currentComment - 1;
+    if(this.allSelectedItems.length == 0) {
+      // TODO move on
+      const index = this.allComments.findIndex(x => x.id === this.currentComment.id);
+      localStorage.setItem('current_val', String(index - 1))
+      this.router.navigate(['/oss-coding/' + this.allComments[index - 1].id]).then(() => {
+          window.location.reload();
+      });
+      return
+    }
 
-    // this.router.navigate(['/oss-coding/' + startVal + '/' + this.endingComment + '/' + this.currentComment])
-    //   .then(() => {
-    //     window.location.reload();
-    //   });
+    this.allSelectedItems.forEach((code) => {
+      let _code = new OssCodeBookModel();
+        _code.item_id = code["item_id"];
+        _code.item_text = code["item_text"];
+        this.currentComment.selectedCodes.push(_code);
+    });
+
+
+    this.ossCodingService.postCodes(this.currentComment).subscribe((response) => {
+      // Code table was successfully updated
+      console.log(response);
+      const index = this.allComments.findIndex(x => x.id === this.currentComment.id);
+      localStorage.setItem('current_val', String(index - 1))
+      this.router.navigate(['/oss-coding/' + this.allComments[index - 1].id])
+        .then(() => {
+          window.location.reload();
+      });
+
+    }, (error) => {
+        this.userMessage = error;
+    });
   }
 
   public goToLink(url: string){

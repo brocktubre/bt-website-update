@@ -50,8 +50,6 @@ export class OssCodingComponent implements OnInit {
 
     const startingCommentId = this.allComments[startingComment].id;
 
-    debugger;
-
     this.router.navigate(['/oss-coding/' + startingCommentId]);
   }
 
