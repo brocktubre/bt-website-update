@@ -1,4 +1,4 @@
-import { OssCodeBookModel, OssCommentModel } from './../oss-comment.model';
+import { OssCodeBookModel, OssCommentModel, OssUserModel } from './../oss-comment.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
@@ -23,8 +23,7 @@ export class OssStartComponent implements OnInit {
   public end: number;
   public remaining: number;
   public myForm: FormGroup;
-
-
+  public accessCode: string;
 
   public dropdownList = [];
   public dropdownListStatements = [];
@@ -35,6 +34,7 @@ export class OssStartComponent implements OnInit {
   public allSelectedItems = [];
 
   dropdownSettings: IDropdownSettings;
+  public ossUserModel: OssUserModel = new OssUserModel();
 
   constructor(private activeRoute: ActivatedRoute,
               private ossCodingService: OssCodingService,
@@ -49,12 +49,14 @@ export class OssStartComponent implements OnInit {
     this.allComments = this.ossCodingService.getAllCommentsSingleton();
     this.currentVal = Number(localStorage.getItem('current_val'));
     const current = this.activeRoute.snapshot.params['id'];
+    this.accessCode = localStorage.getItem('accessCode');
+    let accessName = this.ossUserModel.translateAccessCode(this.accessCode);
     this.loadingComments = true;
 
-    this.ossCodingService.getCommentById(current).subscribe((comment) => {
+    this.ossCodingService.getCommentById(current, accessName).subscribe((comment) => {
         this.loadCurrentComment(comment);
         if(this.allComments === undefined || this.allComments.length == 0) {
-          this.ossCodingService.getAllComments().subscribe((comments) => {
+          this.ossCodingService.getAllComments(this.accessCode).subscribe((comments) => {
               this.allComments = comments;
               this.loadingComments = false;
           });
@@ -172,7 +174,7 @@ export class OssStartComponent implements OnInit {
 
   private updateCommentCodes(direction: string) {
     const index = this.allComments.findIndex(x => x.id === this.currentComment.id);
-    this.ossCodingService.postCodes(this.currentComment).subscribe((response) => {
+    this.ossCodingService.postCodes(this.currentComment, this.accessCode).subscribe((response) => {
       // Code table was successfully updated
       console.log(response);
       if(direction === 'next'){

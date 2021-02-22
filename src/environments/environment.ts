@@ -55,6 +55,14 @@ export const environment = {
     url: 'https://uselessfacts.jsph.pl/random.json?language=en'
   },
   ossCoding: {
+    users: {
+      james: '1e590b2e',
+      brock: '3ec57c8a',
+      millon: '41f50466',
+      paige: '464cf258',
+      igors: '4bc2e3be',
+      igorw: '54ffe364'
+    },
     apiGateway: {
       comments: 'https://axr3eu7rii.execute-api.us-east-1.amazonaws.com/integration/comments',
       codes: 'https://axr3eu7rii.execute-api.us-east-1.amazonaws.com/integration/codes',
