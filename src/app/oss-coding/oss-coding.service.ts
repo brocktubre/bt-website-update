@@ -47,7 +47,7 @@ export class OssCodingService {
     return this.allComments;
   }
 
-  public getAllComments(): Observable<Array<OssCommentModel>> {
+  public getAllComments(accessCode: string): Observable<Array<OssCommentModel>> {
     const sendResult = new Subject<Array<OssCommentModel>>();
 
     let headers = new HttpHeaders();
@@ -73,7 +73,20 @@ export class OssCodingService {
           _comment.author_association = comment["author_association"];
           _comment.is_newcomer_comment = comment["is_newcomer_comment"];
           _comment.repo = comment["repo"];
-          _comment.has_been_coded = (comment["has_been_coded"] === 'true');
+
+          if(accessCode === environment.ossCoding.users.brock) {
+            _comment.has_been_coded = (comment["has_been_coded_brock"] === 'true');
+          } else if(accessCode === environment.ossCoding.users.james) {
+            _comment.has_been_coded = (comment["has_been_coded_james"] === 'true');
+          } else if(accessCode === environment.ossCoding.users.paige) {
+            _comment.has_been_coded = (comment["has_been_coded_paige"] === 'true');
+          } else if(accessCode === environment.ossCoding.users.millon) {
+            _comment.has_been_coded = (comment["has_been_coded_millon"] === 'true');
+          } else if(accessCode === environment.ossCoding.users.igors) {
+            _comment.has_been_coded = (comment["has_been_coded_igors"] === 'true');
+          } else if(accessCode === environment.ossCoding.users.igorw) {
+            _comment.has_been_coded = (comment["has_been_coded_igorw"] === 'true');
+          }
 
           if(comment["codes"] == undefined) {
             _comment.selectedCodes = comment["codes"];
@@ -96,15 +109,28 @@ export class OssCodingService {
     return sendResult.asObservable();
   }
 
-  public postCodes(comment: OssCommentModel): Observable<String> {
+  public postCodes(comment: OssCommentModel, accessCode: string): Observable<String> {
     const sendResult = new Subject<String>();
-
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json;');
     const httpOptions = {
       headers: headers
     };
     const postUrl = environment.ossCoding.apiGateway.codes;
+
+    if(accessCode === environment.ossCoding.users.brock) {
+      comment.accessName = 'brock'
+    } else if(accessCode === environment.ossCoding.users.james) {
+      comment.accessName = 'james'
+    } else if(accessCode === environment.ossCoding.users.paige) {
+      comment.accessName = 'paige'
+    } else if(accessCode === environment.ossCoding.users.millon) {
+      comment.accessName = 'millon'
+    } else if(accessCode === environment.ossCoding.users.igors) {
+      comment.accessName = 'igors'
+    } else if(accessCode === environment.ossCoding.users.igorw) {
+      comment.accessName = 'igorw'
+    }
 
     const payload = { comment }
     const postCodesApi = this.http.post(postUrl, payload, httpOptions);
@@ -117,7 +143,7 @@ export class OssCodingService {
     return sendResult.asObservable();
   }
 
-  public getCommentById(id: string): Observable<OssCommentModel> {
+  public getCommentById(id: string, accessName: string): Observable<OssCommentModel> {
     const sendResult = new Subject<OssCommentModel>();
 
     let headers = new HttpHeaders();
@@ -126,13 +152,13 @@ export class OssCodingService {
       headers: headers
     };
     const payload = {
-      'id': id
+      'id': id,
+      'accessName': accessName
     };
     const getUrl = environment.ossCoding.apiGateway.comment_by_id;
     const getSingleCommentApi = this.http.post(getUrl, payload, httpOptions);
 
     getSingleCommentApi.subscribe((mapping: any) => {
-
       let _comment = new OssCommentModel();
       let comment = mapping[0];
       let codes = mapping[1];
