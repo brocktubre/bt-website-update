@@ -31,8 +31,8 @@ const routes: Routes = [
     { path: 'grades/:id', component: GradesComponent },
     { path: 'qr-reader', component: QrReaderComponent, canActivate: [AuthGuard] },
     { path: 'qr-reader/attendance', component: AttendanceComponent, canActivate: [AuthGuard] },
-    { path: 'oss-coding', component: OssCodingComponent },
-    { path: 'oss-coding/:id', component: OssStartComponent },
+    { path: 'oss-coding', component: OssCodingComponent, canActivate: [AuthGuard] },
+    { path: 'oss-coding/:id', component: OssStartComponent, canActivate: [AuthGuard] },
     { path: '**', redirectTo: '' }
 
 ];

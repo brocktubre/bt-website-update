@@ -15,8 +15,8 @@
       <div class="form-group col-md-6 col-md-offset-3" *ngIf="!showCodes">
         <h3>Enter your access code</h3>
         <p>Enter your provided access code below to start coding.</p>
-        <br />
         <h5 class="text-danger" *ngIf="inputSubmitMessage"><strong>{{inputSubmitMessage}}</strong></h5>
+        <br />
         <input autofocus class="form-control" type="text" value="" placeholder="Enter your access code" #accessCode />
         <button class="btn btn-primary form-control" style="margin-top: 15px;" (click)="startCoding()"> Start Coding </button>
       </div>
@@ -37,13 +37,13 @@
 
 
 <!-- [BEGIN] Footer Container -->
-<!-- <footer class="navbar-default" style="margin-top: 125px;">
+<footer class="navbar-default" [ngClass]="{'sticky-footer': showCodes === false}" style="margin-top: 125px;">
   <div class="container-fluid" style="padding: 5px 0 5px 0;">
     <div class="text-center">
       <p style="color: #FFFFFF;"> © {{year}} Created by Brock Tubre.</p>
     </div>
   </div>
-</footer> -->
+</footer>
 <!-- [END] Footer Container -->
 </div>
 

@@ -35,6 +35,7 @@ export class OssCodingComponent implements OnInit {
   }
 
   public startCoding() {
+    this.inputSubmitMessage = '';
     const accessCode = this.accessCode.nativeElement.value;
     let goodCode = false;
     let ossUserModel: OssUserModel = new OssUserModel();

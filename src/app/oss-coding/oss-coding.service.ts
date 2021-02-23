@@ -88,17 +88,17 @@ export class OssCodingService {
             _comment.has_been_coded = (comment["has_been_coded_igorw"] === 'true');
           }
 
-          if(comment["codes"] == undefined) {
-            _comment.selectedCodes = comment["codes"];
-          } else {
-            comment["codes"].forEach((code) => {
-                let obj = new OssCodeBookModel();
-                obj.item_id = code.item_id
-                obj.item_text = code.item_text
-                _comment.selectedCodes.push(obj);
-            });
+          // if(comment["codes"] == undefined) {
+          //   _comment.selectedCodes = comment["codes"];
+          // } else {
+          //   comment["codes"].forEach((code) => {
+          //       let obj = new OssCodeBookModel();
+          //       obj.item_id = code.item_id
+          //       obj.item_text = code.item_text
+          //       _comment.selectedCodes.push(obj);
+          //   });
+          // }
 
-          }
           returnComments.push(_comment)
           returnComments.sort();
         });
