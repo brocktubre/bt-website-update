@@ -37,6 +37,7 @@ export class OssCodingService {
       { item_id: 21, item_text: 'Discuss' },
       { item_id: 22, item_text: 'Quote' },
       { item_id: 23, item_text: 'Notable' },
+      { item_id: 24, item_text: 'code review request' },
   ]
 
   constructor(private http: HttpClient) {
@@ -312,6 +313,12 @@ export class OssCodingService {
         let codesObj =  new OssCodeBookModel();
         codesObj.item_id = this.staticOssBookModel[23].item_id;
         codesObj.item_text = this.staticOssBookModel[23].item_text;
+        _comment.selectedCodes.push(codesObj);
+      }
+      if(codes["_24"]){
+        let codesObj =  new OssCodeBookModel();
+        codesObj.item_id = this.staticOssBookModel[24].item_id;
+        codesObj.item_text = this.staticOssBookModel[24].item_text;
         _comment.selectedCodes.push(codesObj);
       }
       sendResult.next(_comment);

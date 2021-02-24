@@ -80,8 +80,10 @@ export class OssStartComponent implements OnInit {
         this.selectedItems.push(code);
       } else if(code.item_id > 13 && code.item_id <= 19){
         this.selectedItemsStatements.push(code);
-      } else {
+      } else if(code.item_id > 19 && code.item_id <= 23){
         this.selectedItemsOthers.push(code);
+      } else if(code.item_id == 24) {
+        this.selectedItems.push(code);
       }
     });
 
@@ -105,10 +107,12 @@ export class OssStartComponent implements OnInit {
       this.ossCodingService.staticOssBookModel[7],
       this.ossCodingService.staticOssBookModel[8],
       this.ossCodingService.staticOssBookModel[9],
+      this.ossCodingService.staticOssBookModel[24],
       this.ossCodingService.staticOssBookModel[10],
       this.ossCodingService.staticOssBookModel[11],
       this.ossCodingService.staticOssBookModel[12],
       this.ossCodingService.staticOssBookModel[13]
+
     ];
 
     this.dropdownListStatements = [
