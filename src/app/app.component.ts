@@ -34,7 +34,6 @@ export class AppComponent {
   // @HostListener('document:click', ['$event'])
   // public documentClick(event: Event) {
   //   if (event.currentTarget['activeElement'].indexOf('a') > -1) {
-  //     debugger;
   //     return;
   //   }
 
@@ -44,7 +43,6 @@ export class AppComponent {
   //       buttonClicked: buttonClicked,
   //       url: this.router.url
   //   };
-  //   debugger;
   //   this.firehose.putMouseMoveRecord(payload);
   // }
 }

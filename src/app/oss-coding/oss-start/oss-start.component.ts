@@ -73,7 +73,6 @@ export class OssStartComponent implements OnInit {
 
   public loadCurrentComment(comment: OssCommentModel) {
     this.currentComment = comment;
-
     comment.selectedCodes.forEach((code) => {
       this.allSelectedItems.push(code);
       if(code.item_id <= 13) {
@@ -167,8 +166,9 @@ export class OssStartComponent implements OnInit {
       return;
     }
 
+    this.currentComment.selectedCodes = [];
     this.allSelectedItems.forEach((code) => {
-      let _code = new OssCodeBookModel();
+        let _code = new OssCodeBookModel();
         _code.item_id = code["item_id"];
         _code.item_text = code["item_text"];
         this.currentComment.selectedCodes.push(_code);
@@ -226,6 +226,7 @@ export class OssStartComponent implements OnInit {
       return
     }
 
+    this.currentComment.selectedCodes = [];
     this.allSelectedItems.forEach((code) => {
       let _code = new OssCodeBookModel();
         _code.item_id = code["item_id"];
